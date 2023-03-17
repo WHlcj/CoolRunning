@@ -1,7 +1,6 @@
 
 // MARK: TO DO
 /*
-  2. 打开应用时加载页面
  */
 
 import SwiftUI
