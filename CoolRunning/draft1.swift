@@ -1,43 +1,63 @@
 
 import SwiftUI
-import PhotosUI
 
 struct draft1: View {
-    
-    @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var selectedImageData: Data? = nil
-    
     var body: some View {
-           VStack {
-               PhotosPicker(
-                   selection: $selectedItem,
-                   matching: .images,
-                   photoLibrary: .shared()) {
-                       Text("Select a photo")
-                   }
-                   .onChange(of: selectedItem) { newItem in
-                       Task {
-                           if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                               selectedImageData = data
-                           }
-                       }
-                   }
-               Image("me")
-                   .resizable()
-                   .scaledToFit()
-                   .frame(width: 100)
-                   .clipShape(Circle())
-                   .overlay(Circle().stroke(Color(.systemGray5), lineWidth: 1))
-               if let selectedImageData,
-                  let uiImage = UIImage(data: selectedImageData) {
-                   Image(uiImage: uiImage)
-                       .resizable()
-                       .scaledToFill()
-                       .frame(width: 100, height: 100)
-                       .overlay(Circle().stroke(Color(.systemGray5), lineWidth: 1))
-               }
-           }
-       }
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                HeaderView()
+            }
+        }
+        .coordinateSpace(name: "Scroll")
+        .ignoresSafeArea(.container, edges: .vertical)
+    }
+    
+    @ViewBuilder
+    func HeaderView() -> some View {
+        GeometryReader { proxy in
+            let minY = proxy.frame(in: .named("Scroll")).minY
+            let size = proxy.size
+            let height = (size.height + minY)
+            
+            Image("girl")
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: height > 0 ? height : 0, alignment: .top)
+                .overlay(content: {
+                    ZStack(alignment: .bottom) {
+                        
+                        // 调暗背景图
+                        LinearGradient(colors: [
+                            .clear,
+                            .black.opacity(0.8)
+                        ], startPoint: .top, endPoint: .bottom)
+                        
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("ARTIST")
+                                .font(.callout)
+                                .foregroundColor(.gray)
+                            HStack(alignment: .bottom, spacing: 10) {
+                                Text("Ariana Grande")
+                                    .font(.title.bold())
+                                
+                                Image(systemName: "checkmark.seal.fill")
+                                    .foregroundColor(.blue)
+                                //  label中勾号的背景
+                                    .background(content: {
+                                        Circle()
+                                            .fill(.white)
+                                            .padding(3)
+                                    })
+                            }
+                        }
+                        .padding([.leading, .bottom])
+                    }
+                })
+                .cornerRadius(15)
+                .offset(y: -minY)
+        }
+        .frame(height: 250)
+    }
 }
 
 struct draft1_Previews: PreviewProvider {
