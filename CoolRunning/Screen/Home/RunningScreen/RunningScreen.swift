@@ -11,6 +11,8 @@ struct RunningScreen: View {
     // 数据管理
     @State var runningGoal = 126.0
     @State var runningkm = 120.136
+    @State var isRunning = false
+
     
     
     // 控制流
@@ -141,6 +143,7 @@ extension RunningScreen {
             )
             .animation(.easeIn(duration: 0.1), value: startButtonPressed)
             .onTapGesture {
+                isRunning.toggle()
                // 待完善
             }
             .simultaneousGesture(
@@ -151,6 +154,10 @@ extension RunningScreen {
             )
             .offset(y: startButtonPressed ? 10 : 0)
             .padding(.bottom, 20)
+            .fullScreenCover(isPresented: $isRunning) {
+                RunningView()
+            }
+
     }
 }
 
