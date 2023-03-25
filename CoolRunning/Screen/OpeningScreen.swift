@@ -1,7 +1,9 @@
 
 // MARK: TO DO
 /*
- 
+ 1. 登出时，所有信息清空（账号密码等@AppStorage和UserDefault信息）
+ 2. 搞懂@标记的意思
+ 3. 给以往的函数（尤其是Extension）加上参数注释
  */
 
 import SwiftUI

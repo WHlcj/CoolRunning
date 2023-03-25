@@ -1,5 +1,8 @@
 
 // TO DO
+/*
+ 1.性别选择
+ */
 
 import SwiftUI
 import PhotosUI
@@ -10,13 +13,13 @@ struct PersonalDetailView: View {
     
     // 用户信息
     @AppStorage("user_image") var userImage: String = "me"
-    @AppStorage("user_name") var userName: String = "Elee"
+    @AppStorage("user_alias") var userName: String = "Elee"
     @AppStorage("user_motto") var userMotto: String = "IOS底层分子"
     @AppStorage("user_height") var userHeight: Int = 0
     @AppStorage("user_weight") var userWeight: Int = 0
     @AppStorage("user_gender") var userGender: String = "男"
     @AppStorage("user_birthday") var userBirthday: String = ""
-    
+
     // 控制信息
     @State private var showMottoSheet = false
     @State private var showDetailSwitches = false
@@ -136,7 +139,7 @@ extension PersonalDetailView {
         formatter.dateStyle = .medium
         return formatter
     }
-    
+    // 生日修改sheet
     private var birthdaySheet: some View {
         userBirthday = dateFormatter.string(from: selectedDate)
         return ZStack {
@@ -156,7 +159,7 @@ extension PersonalDetailView {
         .padding(.top, UIScreen.main.bounds.height/2.8)
         .transition(.move(edge: .bottom))
     }
-    
+    // 身高修改sheet
     private var heightSheet: some View {
         ZStack(alignment: .topLeading) {
             // background
@@ -185,7 +188,7 @@ extension PersonalDetailView {
         .padding(.top, UIScreen.main.bounds.height/1.6)
         .transition(.move(edge: .bottom))
     }
-
+    // 体重修改sheet
     private var weightSheet: some View {
          ZStack(alignment: .topLeading) {
              // background
@@ -214,7 +217,7 @@ extension PersonalDetailView {
          .padding(.top, UIScreen.main.bounds.height/1.6)
          .transition(.move(edge: .bottom))
      }
-    
+    // 座右铭修改sheet
     private var mottoSheet: some View {
         ZStack(alignment: .topLeading) {
             // background

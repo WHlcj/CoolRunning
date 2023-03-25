@@ -54,13 +54,17 @@ extension OTPVerificationView {
         }
         .padding(.horizontal, 10)
         .toolbar {
-            ToolbarItem(placement: .keyboard, content: {
-                Button("Done") {
-                    isKeyboardShowing.toggle()
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            })
+            optToolBarItems
         }
+    }
+    
+    private var optToolBarItems: some ToolbarContent {
+        ToolbarItem(placement: .keyboard, content: {
+            Button("Done") {
+                isKeyboardShowing.toggle()
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
+        })
     }
     
     var otpButton: some View {

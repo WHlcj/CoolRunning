@@ -5,6 +5,8 @@ import AGConnectCore
 import AGConnectCredential
 import HMFoundation
 import AGConnectAuth
+import OHMySQL
+import QWeather
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -19,6 +21,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         AGCInstance.startUp(config)
         // 配置SDK联网能力
         AGCInstance.setAccessNetworkStatus(true)
+        
+
+
         
         return true
     }

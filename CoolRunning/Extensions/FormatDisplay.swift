@@ -5,6 +5,8 @@
 //  Created by 何纪栋 on 2023/3/19.
 //
 
+
+
 import Foundation
 
 struct FormatDisplay {
@@ -26,7 +28,7 @@ struct FormatDisplay {
     formatter.zeroFormattingBehavior = .pad
     return formatter.string(from: TimeInterval(seconds))!
   }
-  
+  // 速度格式
   static func speed(distance: Measurement<UnitLength>, seconds: Int, outputUnit: UnitSpeed) -> String {
     let formatter = MeasurementFormatter()
     formatter.unitOptions = [.providedUnit] // 1

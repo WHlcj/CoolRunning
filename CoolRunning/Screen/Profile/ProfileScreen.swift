@@ -1,7 +1,7 @@
 
 // TO DO
 /*
-  1. toolbar简化
+
  */
 
 import SwiftUI
@@ -20,9 +20,7 @@ struct ProfileScreen: View {
             .coordinateSpace(name: "Scroll")
             .ignoresSafeArea(.container, edges: .vertical)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    systemBar
-                }
+                systemBar
             }
 
         }
@@ -33,11 +31,11 @@ struct ProfileScreen: View {
 // MARK: Components
 extension ProfileScreen {
     
-    var profile: some View {
-        VStack {
-            
-        }
-    }
+//    var profile: some View {
+//        VStack {
+//
+//        }
+//    }
     // 顶部信息
     var headerView: some View {
         GeometryReader { proxy in
@@ -133,15 +131,17 @@ extension ProfileScreen {
     }
     
     // 设置按钮
-    var systemBar: some View {
-        NavigationLink (
-            destination: SystemSettingScreen(),
-            label:    {
-                Image(systemName: "gearshape.fill")        .font(.title2)
-                    .foregroundColor(.white)
-                    .opacity(0.7)
-            }
-        )
+    private var systemBar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink (
+                destination: SystemSettingScreen(),
+                label:    {
+                    Image(systemName: "gearshape.fill")        .font(.title2)
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                }
+            )
+        }
     }
     
 }

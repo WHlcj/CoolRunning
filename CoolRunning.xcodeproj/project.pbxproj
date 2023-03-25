@@ -26,6 +26,8 @@
 		8D725B2B29AC54F90095E9D3 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D725B2A29AC54F90095E9D3 /* LoginScreen.swift */; };
 		8D725B2D29AC551F0095E9D3 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D725B2C29AC551F0095E9D3 /* RegisterScreen.swift */; };
 		8D77D41A29C56B7600E602A3 /* draft3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D77D41929C56B7600E602A3 /* draft3.swift */; };
+		8D77D48929CD2CA900E602A3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D77D48829CD2CA900E602A3 /* User.swift */; };
+		8D77D48F29CD30EF00E602A3 /* UserModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D77D48E29CD30EF00E602A3 /* UserModelView.swift */; };
 		8D864D5129BB5F01003D5DED /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D864D5029BB5F01003D5DED /* agconnect-services.plist */; };
 		8D8DEEE829BC78CF00BADA50 /* PersonalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8DEEE729BC78CF00BADA50 /* PersonalDetailView.swift */; };
 		8D8DEEEA29BC7FB800BADA50 /* AccountBindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8DEEE929BC7FB800BADA50 /* AccountBindingView.swift */; };
@@ -59,12 +61,14 @@
 		8D5FF1A229AE2814008F7CB8 /* draft1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = draft1.swift; sourceTree = "<group>"; };
 		8D725B1229AC4AAB0095E9D3 /* CoolRunning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoolRunning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D725B1529AC4AAB0095E9D3 /* AppEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntry.swift; sourceTree = "<group>"; };
-		8D725B1929AC4AAC0095E9D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8D725B1929AC4AAC0095E9D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8D725B1C29AC4AAC0095E9D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8D725B2429AC4C1C0095E9D3 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
 		8D725B2A29AC54F90095E9D3 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		8D725B2C29AC551F0095E9D3 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		8D77D41929C56B7600E602A3 /* draft3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = draft3.swift; sourceTree = "<group>"; };
+		8D77D48829CD2CA900E602A3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8D77D48E29CD30EF00E602A3 /* UserModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelView.swift; sourceTree = "<group>"; };
 		8D864D5029BB5F01003D5DED /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		8D8DEEE729BC78CF00BADA50 /* PersonalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailView.swift; sourceTree = "<group>"; };
 		8D8DEEE929BC7FB800BADA50 /* AccountBindingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBindingView.swift; sourceTree = "<group>"; };
@@ -131,7 +135,6 @@
 		8D41139A29B5813300D40A9A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				8D9B4AA329C1B65A00284F05 /* RunningScreen */,
 				8D5FF1A029AE27CD008F7CB8 /* HomeScreen.swift */,
 			);
 			path = Home;
@@ -140,7 +143,6 @@
 		8D41139B29B5815300D40A9A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8D8DEEE529BC341D00BADA50 /* Settings */,
 				8D41139C29B5817900D40A9A /* ProfileScreen.swift */,
 			);
 			path = Profile;
@@ -183,6 +185,8 @@
 			children = (
 				BB2FD36629C728FF00EEF35B /* Info.plist */,
 				8D725B1529AC4AAB0095E9D3 /* AppEntry.swift */,
+				8D77D48729CD2C8100E602A3 /* Model */,
+				8D77D48A29CD2D9000E602A3 /* ViewModel */,
 				8D3818B429B9C7540089CDB4 /* Depends */,
 				8D4113A029B60D6400D40A9A /* Extensions */,
 				8D725B2329AC4BFA0095E9D3 /* Constant */,
@@ -215,12 +219,13 @@
 		8D725B2629AC50000095E9D3 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				BB2FD36029C7283B00EEF35B /* RunningView.swift */,
 				8D41139829B4DBAD00D40A9A /* OpeningScreen.swift */,
+				8D9B4AA329C1B65A00284F05 /* RunningScreen */,
 				8D3818A229B7882A0089CDB4 /* UserAgreement */,
 				8D725B2729AC54A00095E9D3 /* Log */,
 				8D41139A29B5813300D40A9A /* Home */,
 				8D41139B29B5815300D40A9A /* Profile */,
+				8D8DEEE529BC341D00BADA50 /* Settings */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -233,6 +238,22 @@
 				8D725B2C29AC551F0095E9D3 /* RegisterScreen.swift */,
 			);
 			path = Log;
+			sourceTree = "<group>";
+		};
+		8D77D48729CD2C8100E602A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D77D48829CD2CA900E602A3 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8D77D48A29CD2D9000E602A3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D77D48E29CD30EF00E602A3 /* UserModelView.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8D8DEEE529BC341D00BADA50 /* Settings */ = {
@@ -275,6 +296,7 @@
 		8D9B4AA329C1B65A00284F05 /* RunningScreen */ = {
 			isa = PBXGroup;
 			children = (
+				BB2FD36029C7283B00EEF35B /* RunningView.swift */,
 				8D9B4AA429C1B67600284F05 /* RunningScreen.swift */,
 			);
 			path = RunningScreen;
@@ -301,6 +323,7 @@
 				8D725B0F29AC4AAB0095E9D3 /* Frameworks */,
 				8D725B1029AC4AAB0095E9D3 /* Resources */,
 				49552B65594C8F9A480B9713 /* [CP] Copy Pods Resources */,
+				EBAAAA6759955036D73E3FE1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,6 +420,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EBAAAA6759955036D73E3FE1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -412,6 +452,7 @@
 				BB2FD36529C7286200EEF35B /* UnitExtensions.swift in Sources */,
 				8D725B1629AC4AAB0095E9D3 /* AppEntry.swift in Sources */,
 				8D9B4AA729C1BB0700284F05 /* ShapeStyle+.swift in Sources */,
+				8D77D48929CD2CA900E602A3 /* User.swift in Sources */,
 				8D8DEEEE29BCAE4400BADA50 /* AboutView.swift in Sources */,
 				8D5FF1A129AE27CD008F7CB8 /* HomeScreen.swift in Sources */,
 				8D8DEEF429BDF91700BADA50 /* draft2.swift in Sources */,
@@ -423,6 +464,7 @@
 				8D725B2B29AC54F90095E9D3 /* LoginScreen.swift in Sources */,
 				8D8DEEE829BC78CF00BADA50 /* PersonalDetailView.swift in Sources */,
 				BB2FD36129C7283B00EEF35B /* RunningView.swift in Sources */,
+				8D77D48F29CD30EF00E602A3 /* UserModelView.swift in Sources */,
 				8D3818AA29B799E80089CDB4 /* View+.swift in Sources */,
 				8D3818AF29B817B00089CDB4 /* OTPVerificationView.swift in Sources */,
 				8D41139F29B5896300D40A9A /* SystemSettingScreen.swift in Sources */,

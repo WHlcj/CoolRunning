@@ -31,7 +31,7 @@ struct LoginScreen: View {
     
     // login inputs
     @AppStorage("username") var Username = ""
-    @AppStorage("password") var Password = ""
+    @State private var Password = ""
     
     @FocusState private var fieldInFocus: OnboardingField?
     

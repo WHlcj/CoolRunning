@@ -5,6 +5,10 @@ target 'CoolRunning' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  # mysql依赖
+  pod 'OHMySQL'
+  # 和风天气
+  pod 'QWeather-SDK'
   # add the AGC core pod 
   pod 'AGConnectCore'
   # add pods for any other desired AGC services

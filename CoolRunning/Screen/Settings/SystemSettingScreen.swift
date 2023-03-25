@@ -22,10 +22,10 @@ struct SystemSettingScreen: View {
     @AppStorage("user_name") var userName: String = "Elee"
     @AppStorage("user_motto") var userMotto: String = "IOS底层分子"
     
-    @State private var cacheSize: String = ""
-    
     // 控制管理
+    @State private var cacheSize: String = ""
     @State private var showCleanSheet: Bool = false
+    @State private var isCleaning = false
     @State private var showAlert: Bool = false
 
     var body: some View {
@@ -40,18 +40,7 @@ struct SystemSettingScreen: View {
                 }
             }
             .alert("", isPresented: $showAlert, actions: {
-                Button(role: .destructive) {
-                    withAnimation(.spring()){
-                        currentUserSignedIn = false
-                    }
-                } label: {
-                    Text("退出登录")
-                }
-                Button(role: .cancel) {
-                    
-                } label: {
-                    Text("取消")
-                }
+                logOut
             }, message: {
                 Text("你确定要退出登录吗？")
             })
@@ -64,26 +53,22 @@ struct SystemSettingScreen: View {
 
 // MARK: Components
 extension SystemSettingScreen {
-    private var backToProfileScreen: some View {
-        Section {
-            Button {
-                currentUserSignedIn = false
-            } label: {
-               Image(systemName: "arrow.bakward")
-            }
-        }
-    }
     
     // Sheet管理
     private var sheets: some View {
         ZStack {
             if showCleanSheet {
-                cleanSuccessView
+                CleanSuccessView()
+                    .onAppear {
+                        isCleaning = true
+                    }
+                    .onDisappear {
+                        isCleaning = false
+                    }
             }
         }
         .zIndex(2)
     }
-    
     // 个人信息
     private var mineMessageView: some View {
         Section {
@@ -112,7 +97,6 @@ extension SystemSettingScreen {
             }
         }
     }
-    
     // 功能栏
     private var functionArea: some View {
         Section {
@@ -137,7 +121,6 @@ extension SystemSettingScreen {
     private var cleanCacheItem: some View {
         Button(action: {
             cleanCache()
-            showCleanSheet.toggle()
         }) {
             HStack {
                 Image(systemName: "leaf")
@@ -152,28 +135,10 @@ extension SystemSettingScreen {
                     .foregroundColor(.gray)
             }.padding(.vertical, 8)
         }
+        .disabled(showCleanSheet)
         .onAppear(perform: getCacheSize)
     }
-    ///  清理缓存弹窗
-    private var cleanSuccessView: some View {
-        RoundedRectangle(cornerRadius: 10)
-              .overlay(
-                  VStack(spacing: 12) {
-                      Image(systemName: "checkmark.circle")
-                          .font(.largeTitle)
-                      Text("清理成功")
-                  }
-                      .foregroundColor(.white)
-              )
-              .frame(width: 120, height: 100)
-              .opacity(0.7)
-              .onAppear {
-                  DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                      showCleanSheet = false
-                  })
-              }
-              .transition(.asymmetric(insertion: .scale.animation(.spring()), removal: .opacity.animation(.spring())))
-    }
+
     // 登出按钮
     private var logOutButton: some View {
         Button {
@@ -186,6 +151,41 @@ extension SystemSettingScreen {
                 .foregroundColor(.red)
                 .font(.headline)
         }
+    }
+    // 登出按钮组件
+    private var logOut: some View {
+        Group {
+            Button(role: .destructive) {
+                withAnimation(.spring()){
+                    currentUserSignedIn = false
+                }
+            } label: {
+                Text("退出登录")
+            }
+            Button(role: .cancel) {
+                
+            } label: {
+                Text("取消")
+            }
+        }
+    }
+}
+
+//  清理缓存弹窗
+struct CleanSuccessView: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 10)
+            .overlay(
+                VStack(spacing: 12) {
+                    Image(systemName: "checkmark.circle")
+                        .font(.largeTitle)
+                    Text("清理成功")
+                }
+                .foregroundColor(.white)
+            )
+            .frame(width: 120, height: 100)
+            .opacity(0.7)
+            .transition(.asymmetric(insertion: .scale.animation(.spring()), removal: .opacity.animation(.spring())))
     }
 }
 
@@ -245,18 +245,27 @@ extension SystemSettingScreen {
     
     /// 清除缓存
     func cleanCache() {
-        // 取出cache文件夹目录 缓存文件都在这个目录下
-        let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
-        // 取出文件夹下所有文件数组
-        let files = FileManager.default.subpaths(atPath: cachePath!)!
-        // 遍历删除
-        for file in files {
-            let path = cachePath! + "/\(file)"
-            if FileManager.default.fileExists(atPath: path) {
-                do {
-                    try FileManager.default.removeItem(atPath: path)
-                } catch {
-                    
+        if !isCleaning {
+            // 清理缓存的sheet动画逻辑
+            isCleaning = true
+            showCleanSheet = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                showCleanSheet = false
+                isCleaning = false
+            }
+            // 取出cache文件夹目录 缓存文件都在这个目录下
+            let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
+            // 取出文件夹下所有文件数组
+            let files = FileManager.default.subpaths(atPath: cachePath!)!
+            // 遍历删除
+            for file in files {
+                let path = cachePath! + "/\(file)"
+                if FileManager.default.fileExists(atPath: path) {
+                    do {
+                        try FileManager.default.removeItem(atPath: path)
+                    } catch {
+                        
+                    }
                 }
             }
         }

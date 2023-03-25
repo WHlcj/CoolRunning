@@ -5,11 +5,14 @@
 //  Created by 何纪栋 on 2023/3/18.
 //
 
+/*
+  速度格式修改为 0'0"这样
+ */
 import SwiftUI
 import CoreLocation
 
 struct RunningView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @StateObject var locationManager = LocationManager()
     
@@ -55,12 +58,10 @@ struct RunningView: View {
     }
     
     func startTimer() {
-        //计时器创建
+        //计时器创建,格式化后的数据伴随着计时器的更新一同更新在视图上
         timer = Timer(timeInterval: 1, repeats: true) { _ in
             seconds += 1
-            //格式化后的数据伴随着计时器的更新一同更新在视图上
-            //formatted类我已写好放在Extension文件夹下
-            //数据格式当初折磨了我很久，因此代码显得没那么优雅，但是能跑哈哈，你可以是的自己修改
+            
             self.formattedTime = FormatDisplay.time(seconds)
             //drop字符串最后三位，print可以发现这三位的内容是：" mi",mi表示的是英里，因为虚拟机的本地化缘故，所以单位是英里，drop三个字符后才能转型float
             self.formattedDistance = String(format: "%.2f", Float(FormatDisplay.distance(locationManager.distance.value).dropLast(3))!)
@@ -77,9 +78,10 @@ struct RunningView: View {
     }
     
 }
-//MARK: - 状态机
-//用状态机来管理运动状态，因为可能会涉及到准备状态，我这里预留，准备态一般是keep等运动app在进入运动页后的三秒倒计时状态
+
+
 extension RunningView{
+    //MARK: - 状态机
     //枚举类型，创建状态
     enum Run_State:Int {
         case Preparing = 1
@@ -87,7 +89,7 @@ extension RunningView{
         case Pause = 3
         case Ending = 4
     }
-    //switch/case方法实现状态机
+
     func changeState(newState: Run_State) {
         self.currentState = newState
         switch(newState){
@@ -108,7 +110,7 @@ extension RunningView{
             break
         //结束状态,退出
         case .Ending:
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
             break
         }
     }
