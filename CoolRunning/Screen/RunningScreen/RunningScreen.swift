@@ -22,7 +22,7 @@ struct RunningScreen: View {
     var body: some View {
             
         VStack {
-            runningOverview
+            header
                 
             Spacer()
             startRunningButton
@@ -38,7 +38,7 @@ struct RunningScreen: View {
 extension RunningScreen {
 
     // 左上跑步信息
-    var runningOverview: some View {
+    var header: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
                 runningOverViewTopText

@@ -8,8 +8,7 @@ struct AppEntry: App {
     
     var body: some Scene {
         WindowGroup {
-            draft1()
-//            OpeningScreen()
+            OpeningScreen()
         }
     }
 }

@@ -9,12 +9,13 @@
   速度格式修改为 0'0"这样
  */
 import SwiftUI
+import MapKit
 import CoreLocation
 
 struct RunningView: View {
     @Environment(\.dismiss) var dismiss
     
-    @StateObject var locationManager = LocationManager()
+    @StateObject var vm = MapViewModel()
     
     @State private var timer: Timer?
     @State private var seconds = 0
@@ -27,6 +28,23 @@ struct RunningView: View {
     
     
     var body: some View {
+        ZStack {
+            mapView
+            VStack {
+                Spacer()
+                buttonSection
+            }
+        }
+    }
+    
+    private var mapView: some View {
+        Map(coordinateRegion: $vm.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+            .ignoresSafeArea()
+            .tint(Color(.systemGreen))
+            .allowsHitTesting(false)
+    }
+    
+    private var buttonSection: some View {
         VStack {
             Text("Distance: \(formattedDistance) km")
             Text("Time: \(formattedTime)")
@@ -53,7 +71,7 @@ struct RunningView: View {
             }
         }.onAppear {
             startTimer()
-            locationManager.requestLocation()
+            vm.requestLocation()
         }
     }
     
@@ -64,9 +82,9 @@ struct RunningView: View {
             
             self.formattedTime = FormatDisplay.time(seconds)
             //drop字符串最后三位，print可以发现这三位的内容是：" mi",mi表示的是英里，因为虚拟机的本地化缘故，所以单位是英里，drop三个字符后才能转型float
-            self.formattedDistance = String(format: "%.2f", Float(FormatDisplay.distance(locationManager.distance.value).dropLast(3))!)
+            self.formattedDistance = String(format: "%.2f", Float(FormatDisplay.distance(vm.distance.value).dropLast(3))!)
             //转型后才可以计算速度
-            self.formattedSpeed = FormatDisplay.speed(distance: locationManager.distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerKilometer)
+            self.formattedSpeed = FormatDisplay.speed(distance: vm.distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerKilometer)
         }
     
         RunLoop.current.add(timer!, forMode: .common)
@@ -101,11 +119,11 @@ extension RunningView{
             //开始计时
             startTimer()
             //开始更新定位
-            locationManager.requestLocation()
+            vm.requestLocation()
             break
         //暂停
         case .Pause:
-            locationManager.stopUpdateLocation()
+            vm.stopUpdateLocation()
             stopTimer()
             break
         //结束状态,退出
@@ -117,59 +135,7 @@ extension RunningView{
     
 }
 
-///请求定位权限需要在info.pilst内添加Privacy - Location Always and When In Use Usage Description等
-///在target内的info处添加，我已添加好
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
-    private let locationManager = CLLocationManager()
-    @Published var lastLocation: CLLocation?
-    
-    @Published var distance = Measurement(value: 0, unit: UnitLength.kilometers)
-    @Published var locationList: [CLLocation] = []
-        
-    override init(){
-        super.init()
-        locationManager.delegate = self
-    }
-    
-    func requestLocation() {
-        //活动模式 健身
-        locationManager.activityType = .fitness
-        //定位精度
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //开始定位
-        locationManager.startUpdatingLocation()
-        //自动暂停定位更新
-        locationManager.pausesLocationUpdatesAutomatically = false
-        //后台更新
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-       }
-    
-    func stopUpdateLocation(){
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for newLocation in locations {
-            let howRecent = newLocation.timestamp.timeIntervalSinceNow
-            guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else{
-                continue }
-            
-            if let lastLocation = locationList.last {
-                let delta = newLocation.distance(from: lastLocation)
-                distance = distance + Measurement(value: delta, unit: UnitLength.meters)
-                _ = [lastLocation.coordinate, newLocation.coordinate]
-            }
-            locationList.append(newLocation)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("定位失败")
-    }
-}
+
 
 struct RunningView_Previews: PreviewProvider {
     static var previews: some View {

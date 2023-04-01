@@ -17,6 +17,7 @@
 		8D41139F29B5896300D40A9A /* SystemSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D41139E29B5896300D40A9A /* SystemSettingScreen.swift */; };
 		8D4113A229B60D9D00D40A9A /* AnyTransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4113A129B60D9D00D40A9A /* AnyTransition+.swift */; };
 		8D4113A829B6E1C500D40A9A /* PhoneNumberLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4113A729B6E1C500D40A9A /* PhoneNumberLogin.swift */; };
+		8D58918C29D8559500535493 /* RunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D58918B29D8559500535493 /* RunningViewModel.swift */; };
 		8D5FF1A129AE27CD008F7CB8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FF1A029AE27CD008F7CB8 /* HomeScreen.swift */; };
 		8D5FF1A329AE2814008F7CB8 /* draft1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FF1A229AE2814008F7CB8 /* draft1.swift */; };
 		8D725B1629AC4AAB0095E9D3 /* AppEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D725B1529AC4AAB0095E9D3 /* AppEntry.swift */; };
@@ -57,6 +58,7 @@
 		8D41139E29B5896300D40A9A /* SystemSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingScreen.swift; sourceTree = "<group>"; };
 		8D4113A129B60D9D00D40A9A /* AnyTransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+.swift"; sourceTree = "<group>"; };
 		8D4113A729B6E1C500D40A9A /* PhoneNumberLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberLogin.swift; sourceTree = "<group>"; };
+		8D58918B29D8559500535493 /* RunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewModel.swift; sourceTree = "<group>"; };
 		8D5FF1A029AE27CD008F7CB8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		8D5FF1A229AE2814008F7CB8 /* draft1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = draft1.swift; sourceTree = "<group>"; };
 		8D725B1229AC4AAB0095E9D3 /* CoolRunning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoolRunning.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				8D77D48E29CD30EF00E602A3 /* UserModelView.swift */,
+				8D58918B29D8559500535493 /* RunningViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -268,10 +271,10 @@
 		8D8DEEE629BC789100BADA50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8DAAEDC929CF3664001B8F27 /* AccountBinding */,
+				8DAAEDC829CF3652001B8F27 /* GeneralSetting */,
+				8DAAEDC629CF3583001B8F27 /* PersonalDetail */,
 				8D8DEEEF29BCC2F100BADA50 /* AboutView */,
-				8D8DEEE729BC78CF00BADA50 /* PersonalDetailView.swift */,
-				8D8DEEE929BC7FB800BADA50 /* AccountBindingView.swift */,
-				8D8DEEEB29BCA92800BADA50 /* GeneralSettingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,30 @@
 				8D9B4AA429C1B67600284F05 /* RunningScreen.swift */,
 			);
 			path = RunningScreen;
+			sourceTree = "<group>";
+		};
+		8DAAEDC629CF3583001B8F27 /* PersonalDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8D8DEEE729BC78CF00BADA50 /* PersonalDetailView.swift */,
+			);
+			path = PersonalDetail;
+			sourceTree = "<group>";
+		};
+		8DAAEDC829CF3652001B8F27 /* GeneralSetting */ = {
+			isa = PBXGroup;
+			children = (
+				8D8DEEEB29BCA92800BADA50 /* GeneralSettingView.swift */,
+			);
+			path = GeneralSetting;
+			sourceTree = "<group>";
+		};
+		8DAAEDC929CF3664001B8F27 /* AccountBinding */ = {
+			isa = PBXGroup;
+			children = (
+				8D8DEEE929BC7FB800BADA50 /* AccountBindingView.swift */,
+			);
+			path = AccountBinding;
 			sourceTree = "<group>";
 		};
 		DE7653E19B849903E1B43192 /* Pods */ = {
@@ -474,6 +501,7 @@
 				8D8DEEF229BCC32A00BADA50 /* ACRView.swift in Sources */,
 				8D77D41A29C56B7600E602A3 /* draft3.swift in Sources */,
 				8D3818A629B788AB0089CDB4 /* UserAgreementScreen.swift in Sources */,
+				8D58918C29D8559500535493 /* RunningViewModel.swift in Sources */,
 				8D9B4AA529C1B67600284F05 /* RunningScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
