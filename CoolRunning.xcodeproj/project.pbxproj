@@ -167,6 +167,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8D5891AA29DDC16C00535493 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8D5891A629DDB28900535493 /* CountdownView.swift */,
+				8D5891A429DDB28400535493 /* RunningView.swift */,
+				8D5891A829DDB2A100535493 /* PaceView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8D725B0929AC4AAB0095E9D3 = {
 			isa = PBXGroup;
 			children = (
@@ -303,10 +313,8 @@
 		8D9B4AA329C1B65A00284F05 /* RunningScreen */ = {
 			isa = PBXGroup;
 			children = (
-				8D5891A829DDB2A100535493 /* PaceView.swift */,
-				8D5891A629DDB28900535493 /* CountdownView.swift */,
-				8D5891A429DDB28400535493 /* RunningView.swift */,
 				8D9B4AA429C1B67600284F05 /* RunningScreen.swift */,
+				8D5891AA29DDC16C00535493 /* Views */,
 			);
 			path = RunningScreen;
 			sourceTree = "<group>";
@@ -647,9 +655,11 @@
 				INFOPLIST_FILE = CoolRunning/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要该权限以保证应用退出至后台后仍可以进行跑步定位";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App需要获取您的位置信息以提供定位服务。";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app requires access to motion data for step counting.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "accelerometer gyroscope";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -682,9 +692,11 @@
 				INFOPLIST_FILE = CoolRunning/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要该权限以保证应用退出至后台后仍可以进行跑步定位";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App需要获取您的位置信息以提供定位服务。";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app requires access to motion data for step counting.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "accelerometer gyroscope";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

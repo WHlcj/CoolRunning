@@ -5,7 +5,7 @@ struct FormatDisplay {
     static func distance(_ distance: Measurement<UnitLength>) -> String {
       let formatter = Int(distance.converted(to: .kilometers).value * 100)
       let string = String(format: "%.2f", Double(formatter) / 100)
-        return string
+        return string + "km"
     }
     static func time(_ seconds: Double) -> String {
       let formatter = DateComponentsFormatter()

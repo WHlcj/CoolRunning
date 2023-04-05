@@ -12,8 +12,6 @@ struct RunningScreen: View {
     @State var runningGoal = 126.0
     @State var runningkm = 120.136
     @State var isRunning = false
-
-    
     
     // 控制流
     @GestureState private var startButtonPressed = false
@@ -152,7 +150,7 @@ extension RunningScreen {
             .offset(y: startButtonPressed ? 10 : 0)
             .padding(.bottom, 20)
             .fullScreenCover(isPresented: $isRunning) {
-                RunningView()
+                //RunningView()
             }
 
     }

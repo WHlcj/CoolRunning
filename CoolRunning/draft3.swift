@@ -1,9 +1,3 @@
-//
-//  draft3.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/18.
-//
 
 import SwiftUI
 
@@ -16,52 +10,41 @@ struct draft3: View {
     
     var body: some View {
         ZStack {
-            cleanCacheItem
-            sheets
-        }
-    }
-    
-    private func cleanCache() {
-        if !isCleaning {
-            isCleaning = true
-            showCleanSheet = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                showCleanSheet = false
-                isCleaning = false
-            }
-        }
-    }
-    
-    private var sheets: some View {
-        ZStack {
-            if showCleanSheet {
-                CleanSuccessView()
-                    .onAppear {
-                        isCleaning = true
-                    }
-                    .onDisappear {
-                        isCleaning = false
-                    }
-            }
-        }
-        .zIndex(2)
-    }
-    
-    private var cleanCacheItem: some View {
-        Button(action: cleanCache) {
-            HStack {
-                Image(systemName: "leaf")
-                    .font(.body)
-                    .foregroundColor(.black)
-                Text(" 清理缓存")
-                    .foregroundColor(.black)
-                    .font(.body)
+            Color.blue
+            VStack {
+                header
+                
                 Spacer()
-                Text(cacheSize)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }.padding(.vertical, 8)
+            }
         }
+    }
+    
+    var header: some View {
+        HStack(spacing: 12) {
+            infoCell(info: "1.24km", title: "路程")
+            Divider()
+            infoCell(info: "4'56''", title: "时间")
+            Divider()
+            infoCell(info: "00:05:23", title: "时间")
+            Divider()
+            infoCell(info: "121", title: "步频")
+        }
+        .frame(height: 50)
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(
+            Color.white
+        )
+    }
+    
+    func infoCell(info: String, title: String) -> some View {
+        VStack {
+            Text(info)
+                .font(.title2.bold())
+            Text(title)
+                .font(.body)
+        }
+        .foregroundColor(.black)
     }
 }
 

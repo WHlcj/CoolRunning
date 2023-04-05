@@ -20,25 +20,40 @@ struct RunningView: View {
                 .onAppear {
                     vm.startRunning()
                 }
-                .onDisappear {
-                    vm.locationManager.stopUpdatingLocation()
-                    vm.stopTimer()
-                }
             VStack {
-                Spacer()
                 runningInfo
+                Spacer()
                 runningButton
             }
         }
     }
     
     var runningInfo: some View {
-        VStack {
-            Text("Distance: " + FormatDisplay.distance(vm.distance) + "km")
-            Text("Time:     " + FormatDisplay.time(vm.seconds))
-            Text("平均配速:  " + FormatDisplay.speed(distance: vm.distance, seconds: vm.seconds))
+        HStack(spacing: 12) {
+            infoCell(info: FormatDisplay.distance(vm.distance), title: "路程")
+            Divider()
+            infoCell(info: FormatDisplay.time(vm.seconds), title: "时间")
+            Divider()
+            infoCell(info: FormatDisplay.speed(distance: vm.distance, seconds: vm.seconds), title: "配速")
+            Divider()
+            infoCell(info: "121", title: "步频")
         }
+        .frame(height: 50)
+        .frame(maxWidth: .infinity)
         .padding()
+        .background(
+            Color.white
+        )
+    }
+    
+    func infoCell(info: String, title: String) -> some View {
+        VStack {
+            Text(info)
+                .font(.title2.bold())
+            Text(title)
+                .font(.body)
+        }
+        .foregroundColor(.black)
     }
     
     var runningButton: some View {
@@ -74,7 +89,7 @@ extension RunningView {
  
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RunningView_Previews: PreviewProvider {
     static var previews: some View {
         RunningView()
     }
