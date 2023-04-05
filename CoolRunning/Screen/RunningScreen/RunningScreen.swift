@@ -23,7 +23,6 @@ struct RunningScreen: View {
             
         VStack {
             header
-                
             Spacer()
             startRunningButton
         }
@@ -31,8 +30,6 @@ struct RunningScreen: View {
 
     }
 }
-
-
 
 // MARK: Components
 extension RunningScreen {
