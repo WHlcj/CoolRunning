@@ -7,35 +7,32 @@
 import SwiftUI
 
 struct ProfileScreen: View {
+
+
+    // 用户信息
     @AppStorage("user_image") var userImage: String = "me"
     @AppStorage("user_name") var userName: String = "Elee"
     @AppStorage("user_motto") var userMotto: String = "不抱希望，不抱月亮～"
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    headerView
-                }
-            }
-            .coordinateSpace(name: "Scroll")
-            .ignoresSafeArea(.container, edges: .vertical)
-            .toolbar {
-                systemBar
-            }
+    
+    // 页面跳转控件
+    @State private var settingPagePresented: Bool = false
 
+    var body: some View {
+        ScrollView {
+            VStack {
+                headerView
+            }
         }
- 
+        .coordinateSpace(name: "Scroll")
+        .ignoresSafeArea(.container, edges: .vertical)
+        .toolbar {
+            systemBar
+        }
     }
 }
 
 // MARK: Components
 extension ProfileScreen {
-    
-//    var profile: some View {
-//        VStack {
-//
-//        }
-//    }
     // 顶部信息
     var headerView: some View {
         GeometryReader { proxy in
@@ -65,7 +62,6 @@ extension ProfileScreen {
     }
     // 用户信息
     var userInforView: some View {
-
             HStack( spacing: 20) {
                 // 用户头像信息
                 userImageInfo
@@ -142,6 +138,15 @@ extension ProfileScreen {
                 }
             )
         }
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//            Button {
+//                settingPagePresented = true
+//            } label: {
+//                Image(systemName: "gearshape.fill")        .font(.title2)
+//                    .foregroundColor(.white)
+//                    .opacity(0.7)
+//            }
+//        }
     }
     
 }

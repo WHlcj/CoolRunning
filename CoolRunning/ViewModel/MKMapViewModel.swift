@@ -24,7 +24,7 @@ class MKMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, MKM
     @Published private(set) var pace = 0
     private var timer: Timer?
     @Published private(set) var seconds = 0.0
-    @Published var currentState = RunningState.Running
+    @Published var currentState = RunningState.Preparing
     
     // 地图和定位管理器
     var mapView = MKMapView()
@@ -87,7 +87,7 @@ class MKMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, MKM
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         // 移动地图中心到用户位置
-        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        let span = MKCoordinateSpan(latitudeDelta: 0.006, longitudeDelta: 0.006)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         mapView.setRegion(region, animated: true)
         

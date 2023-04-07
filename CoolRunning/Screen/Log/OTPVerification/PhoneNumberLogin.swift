@@ -13,7 +13,6 @@ struct PhoneNumberLogin: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
             VStack(alignment: .leading) {
                 numbertTxtField
                 userAgreenment
@@ -21,10 +20,6 @@ struct PhoneNumberLogin: View {
                 Spacer()
             }
             .padding(.horizontal)
-            .backToolBar(dismiss: dismiss)
-        }
-        .toolbar(.hidden)
-
     }
 }
 

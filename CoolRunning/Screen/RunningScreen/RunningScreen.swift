@@ -150,9 +150,8 @@ extension RunningScreen {
             .offset(y: startButtonPressed ? 10 : 0)
             .padding(.bottom, 20)
             .fullScreenCover(isPresented: $isRunning) {
-                //RunningView()
+                RunningView()
             }
-
     }
 }
 

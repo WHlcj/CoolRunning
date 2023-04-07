@@ -8,8 +8,10 @@ struct AppEntry: App {
     
     var body: some Scene {
         WindowGroup {
-            //OpeningScreen()
-            RunningView()
+            OpeningScreen()
+            //PersonalDetailView()
+            //RunningView()
+            //RunningTestView()
         }
     }
 }

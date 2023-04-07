@@ -78,7 +78,7 @@ extension PersonalDetailView {
             .frame(maxWidth: .infinity)
         }
     }
-    
+    // 基本信息
     private var generalInformation: some View {
         Section {
             listItem(itemImage: "", itemName: "用户昵称", itemContent: userName)
@@ -90,7 +90,7 @@ extension PersonalDetailView {
             Text("基本信息")
         }
     }
-    
+    // 院系信息
     private var departmentInformation: some View {
         Section {
             listItem(itemImage: "", itemName: "校区", itemContent: "北京信息科技大学 昌平校区")
@@ -101,7 +101,7 @@ extension PersonalDetailView {
             Text("院系信息")
         }
     }
-    
+    // 隐私信息 (非公开)
     private var privacyInformation: some View {
         Section {
             ActionListItem(itemImage: "", itemName: "生日", itemContent: userBirthday, actionBool: $showBirthdaySheet)
@@ -154,7 +154,6 @@ extension PersonalDetailView {
                     .datePickerStyle(.graphical)
                     .frame(maxWidth: UIScreen.main.bounds.width / 1.2, maxHeight:  UIScreen.main.bounds.height / 2)
             }
-
         }
         .padding(.top, UIScreen.main.bounds.height/2.8)
         .transition(.move(edge: .bottom))
@@ -165,12 +164,10 @@ extension PersonalDetailView {
             // background
             Color.white
                 .ignoresSafeArea()
-            
             // content
             VStack {
                 SheetTopButton(bool: $showHeightSheet)
                 HStack {
-                    Spacer()
                     Picker("user_height", selection: $userHeight) {
                         ForEach(150..<211) { number in
                             Text("\(number)")
@@ -181,11 +178,10 @@ extension PersonalDetailView {
                     .pickerStyle(.inline)
                     .frame(maxWidth: UIScreen.main.bounds.width/2)
                     Text("cm")
-                    Spacer()
                     }
             }
         }
-        .padding(.top, UIScreen.main.bounds.height/1.6)
+        .padding(.top, UIScreen.main.bounds.height/1.8) // 修改sheet的高度
         .transition(.move(edge: .bottom))
     }
     // 体重修改sheet
@@ -199,7 +195,6 @@ extension PersonalDetailView {
              VStack {
                  SheetTopButton(bool: $showWeightSheet)
                  HStack {
-                     Spacer()
                      Picker("user_weight", selection: $userWeight) {
                          ForEach(40..<150) { weight in
                              Text("\(weight)")
@@ -210,11 +205,10 @@ extension PersonalDetailView {
                      .pickerStyle(.inline)
                      .frame(maxWidth: UIScreen.main.bounds.width/2)
                      Text("kg")
-                     Spacer()
                  }
              }
          }
-         .padding(.top, UIScreen.main.bounds.height/1.6)
+         .padding(.top, UIScreen.main.bounds.height/1.8) // 修改sheet的高度
          .transition(.move(edge: .bottom))
      }
     // 座右铭修改sheet
@@ -236,7 +230,7 @@ extension PersonalDetailView {
                 Spacer()
             }
         }
-        .padding(.top, UIScreen.main.bounds.height/1.6)
+        .padding(.top, UIScreen.main.bounds.height/2.3) // 修改sheet的高度
         .transition(.move(edge: .bottom))
     }
 
