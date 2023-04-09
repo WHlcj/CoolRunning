@@ -8,26 +8,16 @@
 
 import SwiftUI
 
-// page change
-enum LoginSubViews {
-    case login
-    case register
-}
-
 enum OnboardingField {
     case username
     case password
-}
-
-class LoginViewRounter: ObservableObject {
-    @Published var currentView: LoginSubViews = .login
 }
 
 struct LoginScreen: View {
     
     //page change
     @AppStorage("signed_in") var currentUserSignedIn = false
-    @StateObject var viewRounter: LoginViewRounter = LoginViewRounter()
+    @Environment(\.dismiss) var dismiss
     
     // login inputs
     @AppStorage("username") var Username = ""
@@ -48,25 +38,25 @@ struct LoginScreen: View {
                     .ignoresSafeArea()
                 
                 // content
-                switch viewRounter.currentView {
-                case .login:
-                    logIn
-                        .transition(.moveLtoL)
-                case .register:
-                    RegisterScreen()
-                        .transition(.moveTtoT)
+                VStack {
+                    header
+                    logInTextField
+                    Spacer()
+                    logInButton
                 }
+                .padding(.horizontal, 25)
+                .foregroundColor(.white)
+                    //.transition(.moveLtoL)
             }
         }
-        .environmentObject(viewRounter)
     } 
 }
 
 
 // MARK: Components
 extension LoginScreen {
-    
-    private var welcomeSection: some View {
+    // 顶部标题
+    private var header: some View {
         HStack {
             VStack {
                 Text("乐动校园")
@@ -82,17 +72,6 @@ extension LoginScreen {
         .padding(.top)
     }
 
-    var logIn: some View {
-        VStack {
-            welcomeSection
-            logInTextField
-            Spacer()
-            logInButton
-        }
-        .padding(.horizontal, 25)
-        .foregroundColor(.white)
-    }
-    
     var logInTextField: some View {
         VStack(alignment: .leading) {
             OrdinaryTextField(title: "账号:", placeholder: "Username", bindingValue: $Username, value: $Username) 
@@ -111,6 +90,7 @@ extension LoginScreen {
     var logInButton: some View {
         VStack { // START: VS
             Button {
+                dismiss()
                 withAnimation(.spring()) {
                     currentUserSignedIn = true
                 }
@@ -124,11 +104,7 @@ extension LoginScreen {
             .buttonBorderShape(.roundedRectangle(radius: 10))
             .buttonStyle(.borderedProminent)
             
-            Button {
-                withAnimation(.spring()){
-                    viewRounter.currentView = .register
-                }
-            } label: {
+            NavigationLink(destination: RegisterScreen()) {
                 Text("注册")
                     .bold()
                     .frame(height: 30)

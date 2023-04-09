@@ -4,6 +4,7 @@ import MapKit
 /*
  TO DO:
  1. 获取步频信息
+ 2. 设置停止跑步后，路径颜色变为灰色
  */
 
 //MARK: - 状态机
@@ -65,58 +66,58 @@ class MKMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, MKM
     
     func startRunning() {
         // 开始计时
-        startTimer()
+        self.startTimer()
         // 修改运动状态
-        currentState = .Running
+        self.currentState = .Running
     }
     
     func stopRunning() {
         // 停止计时
-        stopTimer()
+        self.stopTimer()
         // 修改运动状态
-        if currentState == .Running{
-            currentState = .Pause
-        } else if currentState == .Pause {
-            currentState = .Ending
+        if self.currentState == .Running{
+            self.currentState = .Pause
+        } else if self.currentState == .Pause {
+            self.currentState = .Ending
             // 停止运动更新
-            locationManager.stopUpdatingLocation()
+            self.locationManager.stopUpdatingLocation()
         }
     }
     
     // CLLocationManagerDelegate 协议方法，当定位管理器更新位置时调用
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        // 移动地图中心到用户位置
-        let span = MKCoordinateSpan(latitudeDelta: 0.006, longitudeDelta: 0.006)
-        let region = MKCoordinateRegion(center: location.coordinate, span: span)
-        mapView.setRegion(region, animated: true)
-        
-        // 防止数组过大，占用内存过大，引发崩溃
-        if self.locations.count > 50 {
-            self.locations = []
-        }
-        // 计算距离
-        if currentState == .Running { // 必须是跑步状态才增加distance
-            for newLocation in locations {
-                let howRecent = newLocation.timestamp.timeIntervalSinceNow
-                guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else{
-                    continue }
-                
-                if let lastLocation = pre_location {
-                    let delta = newLocation.distance(from: lastLocation)
-                    distance = distance + Measurement(value: delta, unit: UnitLength.meters)
-                }
-                pre_location = newLocation
+            // 移动地图中心到用户位置
+            let span = MKCoordinateSpan(latitudeDelta: 0.006, longitudeDelta: 0.006)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            self.mapView.setRegion(region, animated: true)
+            
+            // 防止数组过大，占用内存过大，引发崩溃
+            if self.locations.count > 50 {
+                self.locations = []
             }
-        } else {
-            self.locations = []
-            pre_location = nil
-        }
-        print("manager的current地址为：\(withUnsafePointer(to: currentState) { $0 })")
-        // 记录用户位置并绘制路径
-        self.locations.append(location.coordinate)
-        let polyline = MKPolyline(coordinates: self.locations, count: self.locations.count)
-        mapView.addOverlay(polyline)
+            // 计算距离
+            if self.currentState == .Running { // 必须是跑步状态才增加distance
+                for newLocation in locations {
+                    let howRecent = newLocation.timestamp.timeIntervalSinceNow
+                    guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else{
+                        continue }
+                    
+                    if let lastLocation = self.pre_location {
+                        let delta = newLocation.distance(from: lastLocation)
+                        self.distance = self.distance + Measurement(value: delta, unit: UnitLength.meters)
+                    }
+                    self.pre_location = newLocation
+                }
+            } else {
+                self.locations = []
+                self.pre_location = nil
+            }
+            print("manager的current地址为：\(withUnsafePointer(to: self.currentState) { $0 })")
+            // 记录用户位置并绘制路径
+            self.locations.append(location.coordinate)
+            let polyline = MKPolyline(coordinates: self.locations, count: self.locations.count)
+            self.mapView.addOverlay(polyline)
     }
     
     // MKMapViewDelegate 协议方法，当地图需要渲染覆盖层时调用
@@ -124,17 +125,16 @@ class MKMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, MKM
         if let polyline = overlay as? MKPolyline {
             // 渲染路径覆盖层
             let renderer = MKPolylineRenderer(polyline: polyline)
-            if currentState == .Running { // 正在跑步时路径为绿色，否则为灰色
+            if self.currentState == .Running { // 正在跑步时路径为绿色，否则为灰色
                 renderer.strokeColor = .systemGreen
             } else {
                 renderer.strokeColor = .systemGray
             }
             renderer.lineWidth = 8
-            print("mapView的current地址为：\(withUnsafePointer(to: currentState) { $0 })")
+            print("mapView的current地址为：\(withUnsafePointer(to: self.currentState) { $0 })")
             return renderer
         }
         // 如果不是路径覆盖层则返回默认的渲染器
         return MKOverlayRenderer()
     }
-
 }

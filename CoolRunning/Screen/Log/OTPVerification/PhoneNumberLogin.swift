@@ -3,6 +3,7 @@
 /*
   1. 手机号码验证
   2. 安全验证页面
+  3. 跳转下一个页面之前，提醒用户勾选用户需知
  */
 import SwiftUI
 
@@ -48,7 +49,7 @@ extension PhoneNumberLogin {
         }
         .padding(.horizontal, 10)
     }
-    
+    // 用户须知同意
     var userAgreenment: some View {
          return HStack {
             Image(systemName: "checkmark.circle.fill")
@@ -69,7 +70,7 @@ extension PhoneNumberLogin {
         .font(.caption)
         .padding(10)
     }
-    
+    // 短信验证码界面跳转
     var nextButton: some View {
         NavigationLink(destination: OTPVerificationView(), label: {
             Text("下一步")

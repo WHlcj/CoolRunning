@@ -1,10 +1,5 @@
 
 import SwiftUI
-import AGConnectCore
-import AGConnectCredential
-import HMFoundation
-import AGConnectAuth
-
 
 /*
  // MARK: TO DO
@@ -29,7 +24,7 @@ struct RegisterScreen: View {
     @Environment(\.dismiss) private var dismiss
     // Page change
     @State var registerState: Int = 0
-    @EnvironmentObject var viewRounter: LoginViewRounter
+ //   @EnvironmentObject var viewRounter: LoginViewRounter
     
     // 注册信息
     @State private var username = ""
@@ -287,7 +282,7 @@ extension RegisterScreen {
     func handleReturnButtonPressed() {
         withAnimation(.spring()){
             if registerState == 0 {
-                viewRounter.currentView = .login
+               // viewRounter.currentView = .login
             } else {
                 registerState -= 1
             }

@@ -1,21 +1,12 @@
 
-// TO DO
-/*
-
- */
-
 import SwiftUI
 
 struct ProfileScreen: View {
-
 
     // 用户信息
     @AppStorage("user_image") var userImage: String = "me"
     @AppStorage("user_name") var userName: String = "Elee"
     @AppStorage("user_motto") var userMotto: String = "不抱希望，不抱月亮～"
-    
-    // 页面跳转控件
-    @State private var settingPagePresented: Bool = false
 
     var body: some View {
         ScrollView {
@@ -129,26 +120,14 @@ extension ProfileScreen {
     // 设置按钮
     private var systemBar: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink (
-                destination: SystemSettingScreen(),
-                label:    {
-                    Image(systemName: "gearshape.fill")        .font(.title2)
+            NavigationLink (destination: SystemSettingScreen()) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.title2)
                         .foregroundColor(.white)
                         .opacity(0.7)
-                }
-            )
+            }
         }
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//            Button {
-//                settingPagePresented = true
-//            } label: {
-//                Image(systemName: "gearshape.fill")        .font(.title2)
-//                    .foregroundColor(.white)
-//                    .opacity(0.7)
-//            }
-//        }
     }
-    
 }
 
 struct ProfileScreen_Previews: PreviewProvider {

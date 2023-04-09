@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct draft3: View {
+struct StopSliderView: View {
     @State var value: Double = 1
     @Binding var controlValue: Bool
     
@@ -71,12 +71,3 @@ struct draft3: View {
         }
     }
 }
-
-
-//struct draft3_Previews: PreviewProvider {
-//    @State var state = false
-//    static var previews: some View {
-//        draft3(contorlValue: $state)
-//            .frame(width: 100, height: 45)
-//    }
-//}

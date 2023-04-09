@@ -1,9 +1,4 @@
 
-// TO DO
-/*
-  1. 运动开始按钮
- */
-
 import SwiftUI
 
 struct RunningScreen: View {

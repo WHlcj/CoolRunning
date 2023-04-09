@@ -1,15 +1,3 @@
-//
-//  SystemSettingScreen.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/6.
-//
-
-// TO DO
-/*
- 1. 搞懂.alert的用法,美化.alert
- */
-
 
 import SwiftUI
 
@@ -156,6 +144,7 @@ extension SystemSettingScreen {
     private var logOut: some View {
         Group {
             Button(role: .destructive) {
+         
                 withAnimation(.spring()){
                     currentUserSignedIn = false
                 }

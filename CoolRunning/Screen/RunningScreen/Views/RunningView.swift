@@ -2,16 +2,22 @@
   北京: latitude:39.916527,longitude:116.397128
  */
 
-/*
- TO DO:
- 1. UI美化工作
- */
 import SwiftUI
 import MapKit
 
 struct RunningView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var vm = MKMapViewModel()
+    
+    // 跑步暂停按钮动画控件
+    @State private var isLocking = false
+    @State private var isTouched = false
+    // 控件颜色
+    var ButtonColor = RadialGradient(
+        gradient: Gradient(colors: [.purple, .cyan]),
+        center: .topLeading,
+        startRadius: 0,
+        endRadius: 180)
 
     var body: some View {
         ZStack {
@@ -108,14 +114,49 @@ extension RunningView {
     }
     // 跑步状态按钮
     var runningState: some View {
-        Button {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                vm.stopRunning()
+        HStack(spacing: 30) {
+            if isLocking {
+                unlockSlider
+            } else {
+                Circle()
+                    .fill(.clear)
+                    .frame(width: 50, height: 50)
+                stopButton
+                lockButton
             }
-        } label: {
-            stopButton
         }
-        .transition(.asymmetric(insertion: .scale(scale: 0.7), removal: AnyTransition.opacity.animation(.easeInOut(duration: 0.1))))
+    }
+    // 锁定按钮
+    var lockButton: some View {
+        Button {
+            isTouched = true
+            withAnimation(.easeInOut(duration: 0.6)){
+                isLocking.toggle()
+            }
+        } label:{
+            Image(systemName: isTouched ? "lock.circle.fill" : "lock.circle")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .tint(ButtonColor)
+                .background(
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 35, height: 35)
+                )
+        }
+        .transition(.asymmetric(insertion: .opacity, removal: .offset(x: -200).animation(.linear(duration: 0.4))))
+    }
+    // 解锁按钮
+    var unlockSlider: some View {
+        HStack {
+            StopSliderView(controlValue: $isLocking)
+                .frame(width: 250, height: 45)
+        }
+        .frame(width: 85, height: 85)
+        .transition(.asymmetric(insertion: .opacity.animation(.easeIn(duration: 0.6)), removal: .opacity.animation(.easeInOut(duration: 0.2))))
+        .onAppear {
+          isTouched = false
+        }
     }
     // 暂停状态按钮
     var pauseState: some View {
@@ -158,37 +199,31 @@ extension RunningView {
     }
     // 暂停跑步按钮
     var stopButton: some View {
-        // 主要形状
-        Circle()
-            .stroke(
-                RadialGradient(
-                    gradient: Gradient(colors: [.purple, .cyan]),
-                    center: .topLeading,
-                    startRadius: 0,
-                    endRadius: 180), lineWidth: 8)
-            .frame(width: 85, height: 85)
-            .overlay(
-                // 中间两竖
-                HStack(spacing: 7) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(RadialGradient(
-                            gradient: Gradient(colors: [.purple, .cyan]),
-                            center: .topLeading,
-                            startRadius: 0,
-                            endRadius: 55))
-                        .frame(width: 9, height: 30)
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(RadialGradient(
-                            gradient: Gradient(colors: [.purple, .cyan]),
-                            center: .topLeading,
-                            startRadius: 0,
-                            endRadius: 80))
-                        .frame(width: 9, height: 30)
-                }
-            )
-            .background(Color.white)
-            .clipShape(Circle())
-            .offset(y: 5)
+        Button {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                vm.stopRunning()
+            }
+        } label: {
+            // 主要形状
+            Circle()
+                .stroke(ButtonColor, lineWidth: 8)
+                .frame(width: 85, height: 85)
+                .overlay(
+                    // 中间两竖
+                    HStack(spacing: 7) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(ButtonColor)
+                            .frame(width: 9, height: 30)
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(ButtonColor)
+                            .frame(width: 9, height: 30)
+                    }
+                )
+                .background(Color.white)
+                .clipShape(Circle())
+                .offset(y: 5)
+        }
+        .transition(.asymmetric(insertion: .scale(scale: 0.7), removal: AnyTransition.opacity.animation(.easeInOut(duration: 0.1))))
     }
 }
 
