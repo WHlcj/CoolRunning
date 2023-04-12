@@ -13,14 +13,12 @@ struct RunningScreen: View {
     @State var background: Bool = false
     
     var body: some View {
-            
         VStack {
             header
             Spacer()
             startRunningButton
         }
         .padding(.horizontal)
-
     }
 }
 
@@ -48,34 +46,28 @@ extension RunningScreen {
             .frame(width: 230)
             // 天气
             VStack {
-                Spacer()
-                weatherInformation
+                WeatherInfoView()
+                    .frame(maxHeight: .infinity, alignment: .center)
                 gpsInformation
             }
+            .frame(maxWidth: .infinity)
         }
         .frame(maxWidth: .infinity, maxHeight: 120)
-    }
-    // 天气信息
-    var weatherInformation: some View {
-        HStack {
-            Text("🌤️")
-                .font(.largeTitle)
-            Text("11℃")
-                .font(.title)
-                .foregroundColor(.gray)
-        }
     }
     // GPS信息
     var gpsInformation: some View {
         HStack {
             Text("GPS")
-                .font(.body)
+                .font(.callout)
             ForEach(0..<3, content: { number in
                 Capsule(style: .circular)
-                    .frame(width: 8, height: 12)
+                    .frame(width: 7, height: 12)
                     .padding(.horizontal, -2)
             })
+            Text("强")
         }
+        .foregroundColor(.green)
+        .opacity(0.7)
     }
     // 跑步进度条
     var runningProgressBar: some View {

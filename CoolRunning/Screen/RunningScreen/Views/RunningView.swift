@@ -11,7 +11,9 @@ struct RunningView: View {
     
     // 跑步暂停按钮动画控件
     @State private var isLocking = false
-    @State private var isTouched = false
+    @State private var removeButton = false
+    @State private var changeButtonIcon = false
+    
     // 控件颜色
     var ButtonColor = RadialGradient(
         gradient: Gradient(colors: [.purple, .cyan]),
@@ -117,7 +119,7 @@ extension RunningView {
         HStack(spacing: 30) {
             if isLocking {
                 unlockSlider
-            } else {
+            } else if !removeButton {
                 Circle()
                     .fill(.clear)
                     .frame(width: 50, height: 50)
@@ -129,12 +131,16 @@ extension RunningView {
     // 锁定按钮
     var lockButton: some View {
         Button {
-            isTouched = true
+            // 切换到锁定状态时先更改Image
+            changeButtonIcon.toggle()
             withAnimation(.easeInOut(duration: 0.6)){
-                isLocking.toggle()
+                removeButton = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    isLocking.toggle()
+                }
             }
         } label:{
-            Image(systemName: isTouched ? "lock.circle.fill" : "lock.circle")
+            Image(systemName: changeButtonIcon ? "lock.circle.fill" : "lock.circle")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .tint(ButtonColor)
@@ -150,12 +156,15 @@ extension RunningView {
     var unlockSlider: some View {
         HStack {
             StopSliderView(controlValue: $isLocking)
-                .frame(width: 250, height: 45)
+                .frame(width: 240, height: 45)
         }
         .frame(width: 85, height: 85)
         .transition(.asymmetric(insertion: .opacity.animation(.easeIn(duration: 0.6)), removal: .opacity.animation(.easeInOut(duration: 0.2))))
         .onAppear {
-          isTouched = false
+            changeButtonIcon = false
+        }
+        .onDisappear {
+            removeButton = false
         }
     }
     // 暂停状态按钮

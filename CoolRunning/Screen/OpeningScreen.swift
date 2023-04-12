@@ -30,7 +30,7 @@ struct OpeningScreen: View {
                     .transition(.moveTtoT)
             case false:
                 LoginScreen()
-                    .transition(.moveTtoT)
+                    .transition(.moveLtoL)
             }
         }
     }

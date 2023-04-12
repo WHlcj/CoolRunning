@@ -9,11 +9,8 @@ target 'CoolRunning' do
   pod 'OHMySQL'
   # 和风天气
   pod 'QWeather-SDK'
-  # add the AGC core pod 
-  pod 'AGConnectCore'
-  # add pods for any other desired AGC services
-  # 认证服务
-  pod 'AGConnectAuth'
+  # Alamofire
+  pod 'Alamofire'
 
 
 end

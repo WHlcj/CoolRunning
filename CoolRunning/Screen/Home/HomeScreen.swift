@@ -7,7 +7,7 @@ struct HomeScreen: View {
     @State private var selectedTabView = 1
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TabView(selection: $selectedTabView) {
                 RunningScreen().tabItem{
                     Label("首页", systemImage: .house)

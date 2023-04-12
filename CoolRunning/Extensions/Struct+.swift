@@ -2,30 +2,26 @@
 import SwiftUI
 
 /// app的消息提醒弹窗
+/// - parameter text: This is the title for the alert.
+/// - parameter value: This is the binding value which control your alert presend.
 struct TextAlert: View {
-    @Binding var text: String
-    @Binding var value: Bool
+    var text: String
     var body: some View {
         HStack {
             Image("icon1")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 25, height: 25)
+                .cornerRadius(5)
             Text(text)
-                .font(.body)
+                .font(.caption)
                 .foregroundColor(.black)
         }
-        .padding(.all, 12)
+        .padding(.all, 8)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
+                    .fill(.ultraThinMaterial)
             )
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-                    // 弹窗持续判断条件
-                    value = false
-                })
-            }
             .transition(.asymmetric(insertion: .scale.animation(.spring()), removal: .opacity.animation(.spring())))
     }
 }

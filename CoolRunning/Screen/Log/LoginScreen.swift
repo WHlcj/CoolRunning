@@ -17,7 +17,6 @@ struct LoginScreen: View {
     
     //page change
     @AppStorage("signed_in") var currentUserSignedIn = false
-    @Environment(\.dismiss) var dismiss
     
     // login inputs
     @AppStorage("username") var Username = ""
@@ -27,7 +26,7 @@ struct LoginScreen: View {
     
     //MARK: MainBody
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 //background
                 RadialGradient(
@@ -46,7 +45,6 @@ struct LoginScreen: View {
                 }
                 .padding(.horizontal, 25)
                 .foregroundColor(.white)
-                    //.transition(.moveLtoL)
             }
         }
     } 
@@ -90,7 +88,6 @@ extension LoginScreen {
     var logInButton: some View {
         VStack { // START: VS
             Button {
-                dismiss()
                 withAnimation(.spring()) {
                     currentUserSignedIn = true
                 }

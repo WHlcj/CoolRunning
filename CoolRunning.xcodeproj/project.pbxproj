@@ -24,6 +24,7 @@
 		8D5891A929DDB2A100535493 /* PaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5891A829DDB2A100535493 /* PaceView.swift */; };
 		8D5FF1A129AE27CD008F7CB8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FF1A029AE27CD008F7CB8 /* HomeScreen.swift */; };
 		8D5FF1A329AE2814008F7CB8 /* draft1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FF1A229AE2814008F7CB8 /* draft1.swift */; };
+		8D60AC9529E697F0001B2CA6 /* WeatherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60AC9429E697F0001B2CA6 /* WeatherInfoView.swift */; };
 		8D725B1629AC4AAB0095E9D3 /* AppEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D725B1529AC4AAB0095E9D3 /* AppEntry.swift */; };
 		8D725B1A29AC4AAC0095E9D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D725B1929AC4AAC0095E9D3 /* Assets.xcassets */; };
 		8D725B1D29AC4AAC0095E9D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D725B1C29AC4AAC0095E9D3 /* Preview Assets.xcassets */; };
@@ -45,6 +46,8 @@
 		8D9B4AA729C1BB0700284F05 /* ShapeStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B4AA629C1BB0700284F05 /* ShapeStyle+.swift */; };
 		8DAD540729E28543000578B2 /* draft4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAD540629E28543000578B2 /* draft4.swift */; };
 		8DAD540929E2986C000578B2 /* StopSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAD540829E2986C000578B2 /* StopSliderView.swift */; };
+		8DDA320C29E509F4001C4038 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDA320B29E509F4001C4038 /* WeatherViewModel.swift */; };
+		8DDA320E29E59CC9001C4038 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDA320D29E59CC9001C4038 /* Weather.swift */; };
 		9426E6B04A295CF3101B0EDE /* Pods_CoolRunning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499758B1DD212DB4D4E3DBF /* Pods_CoolRunning.framework */; };
 		BB2FD36429C7286200EEF35B /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2FD36229C7286200EEF35B /* FormatDisplay.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +72,7 @@
 		8D5891A829DDB2A100535493 /* PaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaceView.swift; sourceTree = "<group>"; };
 		8D5FF1A029AE27CD008F7CB8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		8D5FF1A229AE2814008F7CB8 /* draft1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = draft1.swift; sourceTree = "<group>"; };
+		8D60AC9429E697F0001B2CA6 /* WeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoView.swift; sourceTree = "<group>"; };
 		8D725B1229AC4AAB0095E9D3 /* CoolRunning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoolRunning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D725B1529AC4AAB0095E9D3 /* AppEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntry.swift; sourceTree = "<group>"; };
 		8D725B1929AC4AAC0095E9D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 		8D9B4AA629C1BB0700284F05 /* ShapeStyle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeStyle+.swift"; sourceTree = "<group>"; };
 		8DAD540629E28543000578B2 /* draft4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = draft4.swift; sourceTree = "<group>"; };
 		8DAD540829E2986C000578B2 /* StopSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopSliderView.swift; sourceTree = "<group>"; };
+		8DDA320B29E509F4001C4038 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		8DDA320D29E59CC9001C4038 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		BB2FD36229C7286200EEF35B /* FormatDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
 		BB2FD36629C728FF00EEF35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D499758B1DD212DB4D4E3DBF /* Pods_CoolRunning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoolRunning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +184,7 @@
 				8D5891A429DDB28400535493 /* RunningView.swift */,
 				8D5891A829DDB2A100535493 /* PaceView.swift */,
 				8DAD540829E2986C000578B2 /* StopSliderView.swift */,
+				8D60AC9429E697F0001B2CA6 /* WeatherInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 			children = (
 				8D77D48829CD2CA900E602A3 /* User.swift */,
 				8D5891A029DDB26600535493 /* MapView.swift */,
+				8DDA320D29E59CC9001C4038 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +283,7 @@
 			children = (
 				8D77D48E29CD30EF00E602A3 /* UserModelView.swift */,
 				8D5891A229DDB27600535493 /* MKMapViewModel.swift */,
+				8DDA320B29E509F4001C4038 /* WeatherViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -370,7 +379,6 @@
 				8D725B0F29AC4AAB0095E9D3 /* Frameworks */,
 				8D725B1029AC4AAB0095E9D3 /* Resources */,
 				EBAAAA6759955036D73E3FE1 /* [CP] Embed Pods Frameworks */,
-				0477E888720CE86F12AE3085 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -428,23 +436,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0477E888720CE86F12AE3085 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoolRunning/Pods-CoolRunning-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DB82CA6941A8A85B9F984163 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +489,8 @@
 				8DAD540729E28543000578B2 /* draft4.swift in Sources */,
 				8D4113A829B6E1C500D40A9A /* PhoneNumberLogin.swift in Sources */,
 				8D8DEEEA29BC7FB800BADA50 /* AccountBindingView.swift in Sources */,
+				8DDA320C29E509F4001C4038 /* WeatherViewModel.swift in Sources */,
+				8D60AC9529E697F0001B2CA6 /* WeatherInfoView.swift in Sources */,
 				8D725B1629AC4AAB0095E9D3 /* AppEntry.swift in Sources */,
 				8D9B4AA729C1BB0700284F05 /* ShapeStyle+.swift in Sources */,
 				8D5891A129DDB26600535493 /* MapView.swift in Sources */,
@@ -524,6 +517,7 @@
 				8D725B2D29AC551F0095E9D3 /* RegisterScreen.swift in Sources */,
 				8D41139D29B5817900D40A9A /* ProfileScreen.swift in Sources */,
 				8D8DEEF229BCC32A00BADA50 /* ACRView.swift in Sources */,
+				8DDA320E29E59CC9001C4038 /* Weather.swift in Sources */,
 				8D77D41A29C56B7600E602A3 /* draft3.swift in Sources */,
 				8D3818A629B788AB0089CDB4 /* UserAgreementScreen.swift in Sources */,
 				8D9B4AA529C1B67600284F05 /* RunningScreen.swift in Sources */,
@@ -656,7 +650,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoolRunning/Preview Content\"";
-				DEVELOPMENT_TEAM = K3ZFZ6NBNT;
+				DEVELOPMENT_TEAM = DADW9Q983Q;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -693,7 +687,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoolRunning/Preview Content\"";
-				DEVELOPMENT_TEAM = K3ZFZ6NBNT;
+				DEVELOPMENT_TEAM = DADW9Q983Q;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;

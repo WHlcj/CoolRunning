@@ -1,49 +1,39 @@
+/*
+  北京: latitude:39.916527,longitude:116.397128
+ */
+
 import SwiftUI
+import MapKit
 
-struct ProfileView: View {
 
+struct RunningTestView: View {
+
+    @StateObject var vm = WeatherViewModel()
+    
     var body: some View {
-        ZStack {
-            Circle()
-                .frame(width: 100, height: 100)
-                .overlay(
-                    ZStack {
-                        Circle()
-                            .stroke(
-                                RadialGradient(
-                                    gradient: Gradient(colors: [.purple, .cyan]),
-                                    center: .topLeading,
-                                    startRadius: 0,
-                                    endRadius: 180), lineWidth: 8)
-                        // 中间两竖
-                        HStack(spacing: 15) {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(RadialGradient(
-                                    gradient: Gradient(colors: [.purple, .cyan]),
-                                    center: .topLeading,
-                                    startRadius: 0,
-                                    endRadius: 55))
-                                .frame(width: 15, height: 50)
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(RadialGradient(
-                                    gradient: Gradient(colors: [.purple, .cyan]),
-                                    center: .topLeading,
-                                    startRadius: 0,
-                                    endRadius: 80))
-                                .frame(width: 15, height: 50)
-                        }
-                        .foregroundColor(.green)
+        VStack {
+            if vm.isLoaded {
+                HStack {
+                    Image(vm.icon)
+                        .resizable()
+                    VStack {
+                        Text(vm.text)
+                        Text(vm.temp)
                     }
-                )
-                .foregroundColor(.white)
+                    .foregroundColor(.gray)
+                }
+            } else {
+                ProgressView()
+            }
+        }
+        .onAppear {
+            vm.inquireWeather()
         }
     }
 }
 
-
-struct draft2_Previews: PreviewProvider {
+struct RunningTestView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        RunningTestView()
     }
 }
-

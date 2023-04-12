@@ -10,10 +10,12 @@ import SwiftUI
 struct PhoneNumberLogin: View {
     
     @State private var phoneNumber: String = ""
-    @State private var checkmarkColor = Color.gray
-    @Environment(\.dismiss) var dismiss
+    @State private var didAgreen = false
+    @State private var showSheets = false
+    @State private var shouldNavigateToVerificationView = false
     
     var body: some View {
+        ZStack{
             VStack(alignment: .leading) {
                 numbertTxtField
                 userAgreenment
@@ -21,6 +23,14 @@ struct PhoneNumberLogin: View {
                 Spacer()
             }
             .padding(.horizontal)
+            
+            VStack {
+                Spacer()
+                if showSheets {
+                    TextAlert(text: "请先同意勾选用户协议")
+                }
+            }
+        }
     }
 }
 
@@ -54,9 +64,9 @@ extension PhoneNumberLogin {
          return HStack {
             Image(systemName: "checkmark.circle.fill")
                  .font(.headline)
-                 .foregroundColor(checkmarkColor)
+                 .foregroundColor(didAgreen ? .purple : .gray)
                  .onTapGesture {
-                     checkmarkColor == .gray ? (checkmarkColor = .purple) : (checkmarkColor = .gray)
+                     didAgreen.toggle()
                  }
                 
             Text("已阅读并同意")
@@ -72,20 +82,70 @@ extension PhoneNumberLogin {
     }
     // 短信验证码界面跳转
     var nextButton: some View {
-        NavigationLink(destination: OTPVerificationView(), label: {
-            Text("下一步")
-                .font(.title2)
-                .foregroundColor(.white)
-                .bold()
-                .frame(height: 27)
-                .frame(maxWidth: UIScreen.main.bounds.width)
-                .padding()
-        })
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.purple)
-        )
+//        NavigationLink(destination: OTPVerificationView(), label: {
+//            Text("下一步")
+//                .font(.title2)
+//                .foregroundColor(.white)
+//                .bold()
+//                .frame(height: 27)
+//                .frame(maxWidth: UIScreen.main.bounds.width)
+//                .padding()
+//        })
+//        .background(
+//            RoundedRectangle(cornerRadius: 10)
+//                .frame(maxWidth: .infinity)
+//                .foregroundColor(.purple)
+//        )
+        
+//        Button {
+//            if !didAgreen {
+//                if !showSheets {
+//                    showSheets.toggle()
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+//                        // 弹窗持续判断条件
+//                        showSheets = false
+//                    })
+//                }
+//            } else {
+//                // 跳转到OTPVerificationView(）
+//
+//            }
+//        } label: {
+//            Text("下一步")
+//                .font(.title2.bold())
+//                .frame(height: 30)
+//                .frame(maxWidth: .infinity)
+//        }
+//        .controlSize(.large)
+//        .buttonBorderShape(.roundedRectangle(radius: 10))
+//        .buttonStyle(.borderedProminent)
+        Group {
+            NavigationLink("", destination: OTPVerificationView(), isActive: $shouldNavigateToVerificationView)
+        
+            Button {
+                if !didAgreen {
+                    if !showSheets {
+                        showSheets.toggle()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                            // 弹窗持续判断条件
+                            showSheets = false
+                        })
+                    }
+                } else {
+                    // 跳转到OTPVerificationView(）
+                    shouldNavigateToVerificationView = true // 点击按钮时触发导航链接
+                }
+              
+            } label: {
+                Text("下一步")
+                    .font(.title2.bold())
+                    .frame(height: 30)
+                    .frame(maxWidth: .infinity)
+            }
+            .controlSize(.large)
+            .buttonBorderShape(.roundedRectangle(radius: 10))
+            .buttonStyle(.borderedProminent)
+        }
     }
     
 }

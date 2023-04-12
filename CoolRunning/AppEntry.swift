@@ -1,6 +1,5 @@
 
 import SwiftUI
-import AGConnectCore
 
 @main
 struct AppEntry: App {
@@ -8,10 +7,11 @@ struct AppEntry: App {
     
     var body: some Scene {
         WindowGroup {
-            //OpeningScreen()
+            OpeningScreen()
             //LoginScreen()
             //HomeScreen()
-            RunningTestView()
+            //RunningTestView()
+            //RunningTestView()
         }
     }
 }

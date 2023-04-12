@@ -5,6 +5,7 @@ struct SystemSettingScreen: View {
     // MARK: MainBody
     @Environment(\.dismiss) var dismiss
     @AppStorage("signed_in") var currentUserSignedIn = false
+    
     // 用户信息
     @AppStorage("user_image") var userImage: String = "me"
     @AppStorage("user_name") var userName: String = "Elee"
@@ -15,6 +16,7 @@ struct SystemSettingScreen: View {
     @State private var showCleanSheet: Bool = false
     @State private var isCleaning = false
     @State private var showAlert: Bool = false
+    @State private var isLogout = false
 
     var body: some View {
         ZStack {
@@ -126,7 +128,6 @@ extension SystemSettingScreen {
         .disabled(showCleanSheet)
         .onAppear(perform: getCacheSize)
     }
-
     // 登出按钮
     private var logOutButton: some View {
         Button {
@@ -144,9 +145,9 @@ extension SystemSettingScreen {
     private var logOut: some View {
         Group {
             Button(role: .destructive) {
-         
                 withAnimation(.spring()){
                     currentUserSignedIn = false
+                    isLogout = true
                 }
             } label: {
                 Text("退出登录")
@@ -198,7 +199,6 @@ extension SystemSettingScreen {
             }.padding(.vertical, 8)
         }
     }
-    
     /// 获取缓存大小
     func getCacheSize() {
         DispatchQueue.global().async {
@@ -231,7 +231,6 @@ extension SystemSettingScreen {
             }
         }
     }
-    
     /// 清除缓存
     func cleanCache() {
         if !isCleaning {

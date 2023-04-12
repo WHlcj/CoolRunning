@@ -14,42 +14,29 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - AGConnectAuth (1.8.0.300):
-    - AGConnectCredential (~> 1.4)
-  - AGConnectCore (1.8.0.300):
-    - HMFoundation (~> 1.4)
-  - AGConnectCredential (1.8.0.300):
-    - AGConnectCore (~> 1.4)
-  - HMFoundation (1.8.0.300)
+  - Alamofire (5.6.4)
   - OHMySQL (3.2.0)
   - QWeather-SDK (4.10):
     - AFNetworking (~> 4.0.1)
 
 DEPENDENCIES:
-  - AGConnectAuth
-  - AGConnectCore
+  - Alamofire
   - OHMySQL
   - QWeather-SDK
 
 SPEC REPOS:
   trunk:
     - AFNetworking
-    - AGConnectAuth
-    - AGConnectCore
-    - AGConnectCredential
-    - HMFoundation
+    - Alamofire
     - OHMySQL
     - QWeather-SDK
 
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
-  AGConnectAuth: 6cc94745d20596d370d5980bbd7bde522d98644a
-  AGConnectCore: 4d95388b97ccbc00c7eb1895d832d5429f847f9f
-  AGConnectCredential: 52b6a1846193e7ea83610b78fb4b82d516df4936
-  HMFoundation: 578af8b08444653a722a62e32ec681d954775942
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   OHMySQL: 7b131627f6da0bc82b4cf4523cea47b537ed6260
   QWeather-SDK: 20ef99647726903bb1583ceedee1d418176cedd4
 
-PODFILE CHECKSUM: f5171093ac2b0de9744d529d59a5094ebcc4abdd
+PODFILE CHECKSUM: 4c365d65792272bdce902440cfa7b61d4f6dd057
 
 COCOAPODS: 1.12.0
