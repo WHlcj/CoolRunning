@@ -1,22 +1,16 @@
-//
-//  UserModelView.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/24.
-//
+
+// TO DO:
+/*
+  1. 实现本地mysql的增删改查
+ */
 
 import Foundation
 import OHMySQL
 
-class UserModelView {
+class UserVM {
     
     @Published var user: User
     
-    init(user: User) {
-        self.user = user
-    }
-    
-    // MARK: 本地mysql配置
     private let mysqlUser = MySQLConfiguration(
         user: "root",
         password: "a1234567890s",
@@ -25,6 +19,17 @@ class UserModelView {
         port: 3306,
         socket: nil)
     
+    init(user: User) {
+        self.user = user
+    }
+    
+
+
+    
+}
+
+// MARK: - 本地mysql配置
+extension UserVM {
    
     func initMysql() {
         let coordinator = MySQLStoreCoordinator(configuration: mysqlUser)
@@ -65,9 +70,4 @@ class UserModelView {
     func selectAccount() {
         
     }
-    
-}
-
-extension UserModelView {
-    
 }

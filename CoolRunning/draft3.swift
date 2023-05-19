@@ -73,10 +73,15 @@ struct draft3: View {
 }
 
 
-//struct draft3_Previews: PreviewProvider {
-//    @State var state = false
-//    static var previews: some View {
-//        draft3(contorlValue: $state)
-//            .frame(width: 100, height: 45)
-//    }
-//}
+struct draft3_Previews: PreviewProvider {
+  //  @State var state = false
+    
+    static var previews: some View {
+        ZStack {
+            Color.cyan
+            
+            draft3(controlValue: .constant(false))
+                .frame(width: 250, height: 45)
+        }
+    }
+}

@@ -7,7 +7,7 @@ import MapKit
 
 struct RunningView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var vm = MKMapViewModel()
+    @StateObject private var vm = MKMapVM()
     
     // 跑步暂停按钮动画控件
     @State private var isLocking = false
@@ -42,7 +42,7 @@ extension RunningView {
     
     var runningView: some View {
         ZStack {
-            MapView(mapView: vm.mapView)
+            vm.mapView
                 .ignoresSafeArea()
                 .onAppear {
                     vm.startRunning()

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeatherInfoView: View {
-    @StateObject var vm = WeatherViewModel()
+    @StateObject var vm = WeatherVM()
     var body: some View {
         VStack {
             if vm.isLoaded {
@@ -37,5 +37,6 @@ struct WeatherInfoView: View {
 struct WeatherInfoView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherInfoView()
+            .frame(width: 200, height: 180)
     }
 }

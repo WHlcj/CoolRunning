@@ -11,6 +11,8 @@ target 'CoolRunning' do
   pod 'QWeather-SDK'
   # Alamofire
   pod 'Alamofire'
-
+  # firebase
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
 
 end

@@ -71,3 +71,15 @@ struct StopSliderView: View {
         }
     }
 }
+
+struct StopSliderView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            //background
+            Color.cyan
+            
+            StopSliderView(controlValue: .constant(true))
+                .frame(width: 300, height: 60)
+        }
+    }
+}
