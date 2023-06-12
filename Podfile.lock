@@ -723,7 +723,6 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - OHMySQL (3.2.0)
   - PromisesObjC (2.2.0)
   - QWeather-SDK (4.10):
     - AFNetworking (~> 4.0.1)
@@ -732,7 +731,6 @@ DEPENDENCIES:
   - Alamofire
   - FirebaseAuth
   - FirebaseFirestore
-  - OHMySQL
   - QWeather-SDK
 
 SPEC REPOS:
@@ -753,7 +751,6 @@ SPEC REPOS:
     - leveldb-library
     - Libuv-gRPC
     - nanopb
-    - OHMySQL
     - PromisesObjC
     - QWeather-SDK
 
@@ -774,10 +771,9 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  OHMySQL: 7b131627f6da0bc82b4cf4523cea47b537ed6260
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   QWeather-SDK: 20ef99647726903bb1583ceedee1d418176cedd4
 
-PODFILE CHECKSUM: 75c37dde6bc31a82e6ead1c7b75c4ee72002358d
+PODFILE CHECKSUM: 8c2ce8b25cf3a8458ca33c085653ed915f1ac9e3
 
 COCOAPODS: 1.12.0

@@ -48,6 +48,7 @@ struct PersonalDetailView: View {
 
 // MARK: Components
 extension PersonalDetailView {
+    // 顶部头像
     private var topUserImage: some View {
         Section {} header: {
             VStack {

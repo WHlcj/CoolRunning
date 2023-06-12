@@ -2,11 +2,12 @@
 import SwiftUI
 
 struct SystemSettingScreen: View {
-    // MARK: MainBody
+    // 页面控制
     @Environment(\.dismiss) var dismiss
-    @AppStorage("signed_in") var currentUserSignedIn = false
+    @Binding var path: NavigationPath
     
     // 用户信息
+    @AppStorage("signed_in") var currentUserSignedIn: Bool = false
     @AppStorage("user_image") var userImage: String = "me"
     @AppStorage("user_name") var userName: String = "Elee"
     @AppStorage("user_motto") var userMotto: String = "IOS底层分子"
@@ -16,24 +17,18 @@ struct SystemSettingScreen: View {
     @State private var showCleanSheet: Bool = false
     @State private var isCleaning = false
     @State private var showAlert: Bool = false
-    @State private var isLogout = false
 
     var body: some View {
         ZStack {
             VStack {
                 Form {
-                    NavigationLink(destination: PersonalDetailView(), label: {
+                    NavigationLink(value: AppRouter.PersonalDetailView, label: {
                         mineMessageView
                     })
                     functionArea
                     logOutButton
                 }
             }
-            .alert("", isPresented: $showAlert, actions: {
-                logOut
-            }, message: {
-                Text("你确定要退出登录吗？")
-            })
             sheets
         }
         .navigationTitle("设置")
@@ -90,20 +85,20 @@ extension SystemSettingScreen {
     // 功能栏
     private var functionArea: some View {
         Section {
-            NavigationLink(destination: AccountBindingView(), label: {
+            NavigationLink(value: AppRouter.AccountBindingView) {
                 listItem(itemImage: "lock", itemName: " 账号绑定", itemContent: "已绑定")
-            })
-            NavigationLink(destination: GeneralSettingView(), label: {
+            }
+            NavigationLink(value: AppRouter.GeneralSettingView) {
                 listItem(itemImage: "gear.circle", itemName: " 通用设置", itemContent: "")
-            })
+            }
 
             listItem(itemImage: "icloud.and.arrow.down", itemName: " 版本更新", itemContent: "Version 1.0.0")
 
             cleanCacheItem
             
-            NavigationLink(destination: AboutView(), label: {
+            NavigationLink(value: AppRouter.AboutView) {
                 listItem(itemImage: "personalhotspot", itemName: "关于", itemContent: "")
-            })
+            }
 
         }
     }
@@ -131,7 +126,9 @@ extension SystemSettingScreen {
     // 登出按钮
     private var logOutButton: some View {
         Button {
-            showAlert.toggle()
+            //showAlert.toggle()
+            currentUserSignedIn = false
+            path.removeLast(path.count)
         } label: {
             Text("退出登录")
                 .padding(10)
@@ -139,24 +136,6 @@ extension SystemSettingScreen {
                 .cornerRadius(10)
                 .foregroundColor(.red)
                 .font(.headline)
-        }
-    }
-    // 登出按钮组件
-    private var logOut: some View {
-        Group {
-            Button(role: .destructive) {
-                withAnimation(.spring()){
-                    currentUserSignedIn = false
-                    isLogout = true
-                }
-            } label: {
-                Text("退出登录")
-            }
-            Button(role: .cancel) {
-                
-            } label: {
-                Text("取消")
-            }
         }
     }
 }
@@ -257,11 +236,13 @@ extension SystemSettingScreen {
                 }
             }
         }
+        getCacheSize()
     }
 }
 
 struct SystemSettingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SystemSettingScreen()
+        @State var path = NavigationPath()
+        SystemSettingScreen(path: $path)
     }
 }

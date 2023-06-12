@@ -12,24 +12,17 @@ import SwiftUI
 struct OpeningScreen: View {
     
     @AppStorage("signed_in") var currentUserSignedIn: Bool = false
+    @State var path = NavigationPath()
     
     var body: some View {
-        ZStack {
-            //background
-            RadialGradient(
-                gradient: Gradient(colors: [.purple, .cyan]),
-                center: .topLeading,
-                startRadius: 10,
-                endRadius: UIScreen.main.bounds.height)
-                .ignoresSafeArea()
-
+        NavigationStack(path: $path) {
             // content
             switch currentUserSignedIn {
             case true:
-                HomeScreen()
+                ContentView(view: AppRouter.HomeScreen, path: $path)
                     .transition(.moveTtoT)
             case false:
-                LoginScreen()
+                ContentView(view: AppRouter.LoginScreen, path: $path)
                     .transition(.moveLtoL)
             }
         }

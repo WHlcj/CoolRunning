@@ -17,6 +17,7 @@ struct LoginScreen: View {
     
     //page change
     @AppStorage("signed_in") var currentUserSignedIn = false
+    @Binding var path: NavigationPath
     
     // login inputs
     @AppStorage("username") var Username = ""
@@ -26,7 +27,6 @@ struct LoginScreen: View {
     
     //MARK: MainBody
     var body: some View {
-        NavigationStack {
             ZStack {
                 //background
                 RadialGradient(
@@ -46,7 +46,6 @@ struct LoginScreen: View {
                 .padding(.horizontal, 25)
                 .foregroundColor(.white)
             }
-        }
     } 
 }
 
@@ -77,7 +76,10 @@ extension LoginScreen {
             HStack {
                 NavigationLink("忘记密码?", destination: Text("忘记密码"))
                 Spacer()
-                NavigationLink("手机号登录", destination: PhoneNumberLogin())
+                NavigationLink("手机号登录", value: AppRouter.PhoneNumberLoginView)
+                    .navigationDestination(for: AppRouter.self) { page in
+                        ContentView(view: page, path: $path)
+                    }
             }
             .font(.headline)
             .foregroundColor(Color.cyan)
@@ -101,7 +103,7 @@ extension LoginScreen {
             .buttonBorderShape(.roundedRectangle(radius: 10))
             .buttonStyle(.borderedProminent)
             
-            NavigationLink(destination: RegisterScreen()) {
+            NavigationLink(value: AppRouter.RegisterScreen) {
                 Text("注册")
                     .bold()
                     .frame(height: 30)
@@ -138,6 +140,7 @@ extension LoginScreen {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        @State var path = NavigationPath()
+        LoginScreen(path: $path)
     }
 }

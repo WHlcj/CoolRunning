@@ -13,7 +13,7 @@ enum SFSymbol: String {
     case run = "figure.run"
     case circle = "circle.circle"
     case envelope = "envelope.fill"
-    case rarrow = "chevron.right"
+    case rarrow = "chevron.right" 
 }
 
 extension SFSymbol: View {

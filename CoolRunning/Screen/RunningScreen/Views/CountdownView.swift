@@ -7,7 +7,7 @@ struct CountdownView: View {
     
     var body: some View {
         ZStack {
-            Color.green.edgesIgnoringSafeArea(.all)
+            Color.green.ignoresSafeArea()
             Text(countDownInfo)
                 .font(.system(size: 200, weight: .bold))
                 .foregroundColor(.white)

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AboutView: View {
+    @Binding var path: NavigationPath
+    
     var body: some View {
             VStack {
                 Form {
@@ -15,9 +17,9 @@ struct AboutView: View {
                     textButton(text: "第三方信息共享清单")
                     textButton(text: "隐私政策摘要")
                     textButton(text: "协议与条款")
-                    NavigationLink(destination: ACRView(), label: {
+                    NavigationLink(value: AppRouter.ACRView) {
                         textButton(text: "关于CoolRunning")
-                    })
+                    }
                 }
             }
             .navigationTitle("关于")
@@ -46,6 +48,7 @@ extension AboutView {
 
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
-        AboutView()
+        @State var path = NavigationPath()
+        AboutView(path: $path)
     }
 }

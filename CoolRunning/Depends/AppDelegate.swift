@@ -1,7 +1,5 @@
 import Foundation
 import UIKit
-
-import OHMySQL
 import QWeather
 
 class AppDelegate: NSObject, UIApplicationDelegate {

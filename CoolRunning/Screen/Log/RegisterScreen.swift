@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RegisterScreen: View {
     
-    //MARK: AddGenderInit
+    // AddGenderInit
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.purple)
         

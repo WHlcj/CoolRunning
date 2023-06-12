@@ -7,13 +7,13 @@
  */
 import SwiftUI
 
-struct PhoneNumberLogin: View {
+struct PhoneNumberLoginView: View {
     
+    @Binding var path: NavigationPath
     @State private var phoneNumber: String = ""
     @State private var didAgreen = false
     @State private var showSheets = false
-    @State private var shouldNavigateToVerificationView = false
-    
+
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
@@ -35,7 +35,7 @@ struct PhoneNumberLogin: View {
 }
 
 // MARK: Components
-extension PhoneNumberLogin {
+extension PhoneNumberLoginView {
     var numbertTxtField: some View {
         VStack(alignment: .leading) {
             Text("输入手机号码")
@@ -82,46 +82,7 @@ extension PhoneNumberLogin {
     }
     // 短信验证码界面跳转
     var nextButton: some View {
-//        NavigationLink(destination: OTPVerificationView(), label: {
-//            Text("下一步")
-//                .font(.title2)
-//                .foregroundColor(.white)
-//                .bold()
-//                .frame(height: 27)
-//                .frame(maxWidth: UIScreen.main.bounds.width)
-//                .padding()
-//        })
-//        .background(
-//            RoundedRectangle(cornerRadius: 10)
-//                .frame(maxWidth: .infinity)
-//                .foregroundColor(.purple)
-//        )
-        
-//        Button {
-//            if !didAgreen {
-//                if !showSheets {
-//                    showSheets.toggle()
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-//                        // 弹窗持续判断条件
-//                        showSheets = false
-//                    })
-//                }
-//            } else {
-//                // 跳转到OTPVerificationView(）
-//
-//            }
-//        } label: {
-//            Text("下一步")
-//                .font(.title2.bold())
-//                .frame(height: 30)
-//                .frame(maxWidth: .infinity)
-//        }
-//        .controlSize(.large)
-//        .buttonBorderShape(.roundedRectangle(radius: 10))
-//        .buttonStyle(.borderedProminent)
         Group {
-            NavigationLink("", destination: OTPVerificationView(), isActive: $shouldNavigateToVerificationView)
-        
             Button {
                 if !didAgreen {
                     if !showSheets {
@@ -133,7 +94,7 @@ extension PhoneNumberLogin {
                     }
                 } else {
                     // 跳转到OTPVerificationView(）
-                    shouldNavigateToVerificationView = true // 点击按钮时触发导航链接
+                    path.append(AppRouter.OTPVerificationView)
                 }
               
             } label: {
@@ -151,12 +112,13 @@ extension PhoneNumberLogin {
 }
 
 // MARK: Functions
-extension PhoneNumberLogin {
+extension PhoneNumberLoginView {
     
 }
 
 struct PhoneNumberLogin_Previews: PreviewProvider {
     static var previews: some View {
-        PhoneNumberLogin()
+        @State var path = NavigationPath()
+        PhoneNumberLoginView(path: $path)
     }
 }
