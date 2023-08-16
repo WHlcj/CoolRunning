@@ -33,15 +33,17 @@ extension WeatherVM: CLLocationManagerDelegate {
         locationManager.requestLocation()
         self.isRequested = true
     }
-    
+    // 成功请求位置信息调用的函数
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
+        // 查询当前定位的天气实时信息
         self.weatherManager.fetchWeather(long: location.coordinate.longitude, lat: location.coordinate.latitude)
     }
-    
+    // 失败请求位置信息
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
+    
 }
 
 // MARK: - WeatherManagerDelegate

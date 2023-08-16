@@ -1,8 +1,12 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/AGConnectAuth" "${PODS_ROOT}/AGConnectCore" "${PODS_ROOT}/AGConnectCredential" "${PODS_ROOT}/HMFoundation" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AGConnectAuth" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AGConnectCore" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AGConnectCredential" "${PODS_XCFRAMEWORKS_BUILD_DIR}/HMFoundation"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking" "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_ROOT}/QWeather-SDK" "${PODS_XCFRAMEWORKS_BUILD_DIR}/QWeather-SDK"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -ObjC -framework "AGConnectAuth" -framework "AGConnectCore" -framework "AGConnectCredential" -framework "HMFoundation" -framework "Security"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift '@executable_path/Frameworks' '@loader_path/Frameworks'
+LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "AFNetworking" -framework "Alamofire" -framework "CFNetwork" -framework "QWeather"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

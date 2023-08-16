@@ -7,8 +7,7 @@ struct AppEntry: App {
     
     var body: some Scene {
         WindowGroup {
-            OpeningScreen()
-            //WeatherInfoView()
+            OpeningView()
         }
     }
 }

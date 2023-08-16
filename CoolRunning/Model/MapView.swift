@@ -4,7 +4,6 @@ import SwiftUI
 struct MapView: UIViewRepresentable {
 
     var map = MKMapView()
-   // var locations: [CLLocationCoordinate2D] = []
     
     internal func makeUIView(context: Context) -> MKMapView {
         //map.delegate = context.coordinator // 将代理设置为 MKMapVM

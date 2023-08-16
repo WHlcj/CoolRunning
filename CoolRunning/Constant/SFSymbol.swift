@@ -1,9 +1,3 @@
-//
-//  SFSymbol.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/2/27.
-//
 
 import SwiftUI
 
@@ -13,7 +7,6 @@ enum SFSymbol: String {
     case run = "figure.run"
     case circle = "circle.circle"
     case envelope = "envelope.fill"
-    case rarrow = "chevron.right" 
 }
 
 extension SFSymbol: View {
