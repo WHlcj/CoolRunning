@@ -5,6 +5,7 @@ struct HomeView: View {
     
     @AppStorage("signed_in") var currentUserSignedIn = false
     @State private var selectedTabView = 1
+    /// App导航路由
     @Binding var path: NavigationPath
     
     var body: some View {

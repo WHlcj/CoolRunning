@@ -17,6 +17,7 @@ struct LoginView: View {
     
     //page change
     @AppStorage("signed_in") var currentUserSignedIn = false
+    /// App导航路由
     @Binding var path: NavigationPath
     
     // login inputs
@@ -121,22 +122,13 @@ extension LoginView {
                 .frame(width: UIScreen.main.bounds.width / 1.5, height: 1)
                 .padding()
             HStack {
-                NavigationLink(destination: Text("邮件登录"), label: {
-                    Image(systemName: "envelope.fill")})
+                NavigationLink(destination: Text("邮件登录")) {
+                    SFSymbol.envelope}
             }
         }// END: VS
         .font(.title2)
     }
 }
-
-
-// MARK: Functions
-extension LoginView {
-    
-
-}
-
-
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {

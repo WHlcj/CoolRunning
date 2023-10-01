@@ -1,13 +1,8 @@
-//
-//  AboutView.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/11.
-//
 
 import SwiftUI
 
 struct AboutView: View {
+    /// App导航路由
     @Binding var path: NavigationPath
     
     var body: some View {

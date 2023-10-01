@@ -8,7 +8,7 @@ class WeatherVM: NSObject, ObservableObject {
 
     @Published var icon: String = ""
     @Published var temp: String = ""
-    @Published var text: String = ""
+    @Published var depriction: String = ""
     // 防止多次查询
     @Published var isRequested = false
     // 获取天气信息后加载视图
@@ -51,7 +51,7 @@ extension WeatherVM: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: Weather) {
         self.icon = weather.iconName
         self.temp = weather.tempString
-        self.text = weather.text
+        self.depriction = weather.text
         self.isLoaded = true
     }
     

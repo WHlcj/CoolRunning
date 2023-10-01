@@ -2,30 +2,28 @@
 import SwiftUI
 
 struct SystemSettingView: View {
-   
+    
     @Environment(\.dismiss) var dismiss
-    // App导航路由
+    /// App导航路由
     @Binding var path: NavigationPath
     
     // 用户信息
     @AppStorage("signed_in") var currentUserSignedIn: Bool = false
     @AppStorage("user_image") var userImage: String = "me"
     @AppStorage("user_name") var userName: String = "Elee"
-    @AppStorage("user_motto") var userMotto: String = "IOS底层分子"
+    @AppStorage("user_motto") var userMotto: String = "iOS底层分子"
     
     // 控制管理
     @State private var cacheSize: String = ""
     @State private var showCleanSheet: Bool = false
     @State private var isCleaning = false
     @State private var showAlert: Bool = false
-
+    
     var body: some View {
         ZStack {
             VStack {
                 Form {
-                    NavigationLink(value: AppRouter.PersonalDetailView, label: {
-                        mineMessageView
-                    })
+                    mineMessageView
                     functionArea
                     logOutButton
                 }
@@ -40,50 +38,44 @@ struct SystemSettingView: View {
 // MARK: Components
 extension SystemSettingView {
     
-    // Sheet管理
+    /// Sheet管理
     private var sheets: some View {
         ZStack {
             if showCleanSheet {
                 CleanSuccessView()
-                    .onAppear {
-                        isCleaning = true
-                    }
-                    .onDisappear {
-                        isCleaning = false
-                    }
             }
         }
         .zIndex(2)
     }
-    // 个人信息
+    /// 个人信息
     private var mineMessageView: some View {
-        Section {
-            Button(action: {
-                
-            }) {
-                HStack(spacing: 15) {
-                    Image(userImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 65)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color(.systemGray5), lineWidth: 1))
-
-                    VStack(alignment: .leading, spacing: 7) {
-                        Text(userName)
-                            .font(.title3.bold())
-                            .foregroundColor(.black)
-                        Text(userMotto)
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                    }
-   
+        NavigationLink(value: AppRouter.PersonalDetailView) {
+            Section {
+                Button {
+                    
+                } label: {
+                    HStack(spacing: 15) { // STA HStack
+                        Image(userImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 65)
+                            .clipShape(Circle())
+                        // 用户名称和个性签名
+                        VStack(alignment: .leading, spacing: 7) {
+                            Text(userName)
+                                .font(.title3.bold())
+                                .foregroundColor(.black)
+                            Text(userMotto)
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                        }
+                    } // END HStack
+                    
                 }
-                .padding(.vertical, 5)
             }
         }
     }
-    // 功能栏
+    /// 功能栏
     private var functionArea: some View {
         Section {
             NavigationLink(value: AppRouter.AccountBindingView) {
@@ -92,29 +84,27 @@ extension SystemSettingView {
             NavigationLink(value: AppRouter.GeneralSettingView) {
                 listItem(itemImage: "gear.circle", itemName: " 通用设置", itemContent: "")
             }
-
+            
             listItem(itemImage: "icloud.and.arrow.down", itemName: " 版本更新", itemContent: "Version 1.0.0")
-
+            
             cleanCacheItem
             
             NavigationLink(value: AppRouter.AboutView) {
                 listItem(itemImage: "personalhotspot", itemName: "关于", itemContent: "")
             }
-
+            
         }
     }
-    // 清理缓存按钮
+    /// 清理缓存按钮
     private var cleanCacheItem: some View {
-        Button(action: {
+        Button {
             cleanCache()
-        }) {
+        } label: {
             HStack {
                 Image(systemName: "leaf")
-                    .font(.body)
                     .foregroundColor(.black)
                 Text(" 清理缓存")
                     .foregroundColor(.black)
-                    .font(.body)
                 Spacer()
                 Text(cacheSize)
                     .font(.subheadline)
@@ -122,12 +112,11 @@ extension SystemSettingView {
             }.padding(.vertical, 8)
         }
         .disabled(showCleanSheet)
-        .onAppear(perform: getCacheSize)
+        .onAppear { getCacheSize() }
     }
-    // 登出按钮
+    /// 登出按钮
     private var logOutButton: some View {
         Button {
-            //showAlert.toggle()
             currentUserSignedIn = false
             print("退出登录时path的容量是\(path.count)")
             path.removeLast(path.count)
@@ -135,7 +124,6 @@ extension SystemSettingView {
             Text("退出登录")
                 .padding(10)
                 .frame(maxWidth: .infinity)
-                .cornerRadius(10)
                 .foregroundColor(.red)
                 .font(.headline)
         }
@@ -152,7 +140,7 @@ struct CleanSuccessView: View {
                         .font(.largeTitle)
                     Text("清理成功")
                 }
-                .foregroundColor(.white)
+                    .foregroundColor(.white)
             )
             .frame(width: 120, height: 100)
             .opacity(0.7)
@@ -214,13 +202,11 @@ extension SystemSettingView {
     }
     /// 清除缓存
     func cleanCache() {
-        if !isCleaning {
+        if !showCleanSheet {
             // 清理缓存的sheet动画逻辑
-            isCleaning = true
             showCleanSheet = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 showCleanSheet = false
-                isCleaning = false
             }
             // 取出cache文件夹目录 缓存文件都在这个目录下
             let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
@@ -242,7 +228,7 @@ extension SystemSettingView {
     }
 }
 
-struct SystemSettingScreen_Previews: PreviewProvider {
+struct SystemSettingView_Previews: PreviewProvider {
     static var previews: some View {
         @State var path = NavigationPath()
         SystemSettingView(path: $path)

@@ -6,7 +6,9 @@ import SwiftUI
 import MapKit
 
 struct RunningView: View {
+    
     @Environment(\.dismiss) var dismiss
+    // 跑步VM
     @StateObject private var vm = MKMapVM()
     
     // 跑步暂停按钮动画控件
@@ -27,9 +29,9 @@ struct RunningView: View {
             case .Preparing:
                 CountdownView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
                             vm.currentState = .Running
-                        })
+                        }
                     }
             default:
                 runningView
@@ -38,8 +40,10 @@ struct RunningView: View {
     }
 }
 
+// MARK: - Components
+
 extension RunningView {
-    
+    /// 跑步地图页面
     var runningView: some View {
         ZStack {
             vm.mapView
@@ -48,14 +52,14 @@ extension RunningView {
                     vm.startRunning()
                 }
             VStack {
-                header
+                runningInfo
                 Spacer()
                 runningButtons
             }
         }
     }
-    
-    var header: some View {
+    /// 顶部信息栏
+    var runningInfo: some View {
         HStack(alignment: .bottom) {
             VStack(spacing: 13) {
                 Text(FormatDisplay.distance(vm.distance))
@@ -81,7 +85,7 @@ extension RunningView {
             Color.white
         )
     }
-    // 单条跑步信息
+    /// 单条跑步信息
     func infoCell(info: String, title: String) -> some View {
         VStack(spacing: 13) {
             Text(info)
@@ -94,7 +98,7 @@ extension RunningView {
         }
         .frame(maxWidth: 100)
     }
-    // 跑步按钮总控
+    /// 跑步按钮总控
     var runningButtons: some View {
         VStack {
             switch vm.currentState {
@@ -114,7 +118,7 @@ extension RunningView {
         }
         .padding(.bottom, 60)
     }
-    // 跑步状态按钮
+    /// 跑步状态按钮
     var runningState: some View {
         HStack(spacing: 30) {
             if isLocking {
@@ -128,7 +132,7 @@ extension RunningView {
             }
         }
     }
-    // 锁定按钮
+    /// 锁定按钮
     var lockButton: some View {
         Button {
             // 切换到锁定状态时先更改Image
@@ -152,7 +156,7 @@ extension RunningView {
         }
         .transition(.asymmetric(insertion: .opacity, removal: .offset(x: -200).animation(.linear(duration: 0.4))))
     }
-    // 解锁按钮
+    /// 解锁按钮
     var unlockSlider: some View {
         HStack {
             StopSliderView(controlValue: $isLocking)
@@ -167,17 +171,17 @@ extension RunningView {
             removeButton = false
         }
     }
-    // 暂停状态按钮
+    /// 暂停状态按钮
     var pauseState: some View {
         HStack(spacing: 20) {
             // 继续跑步按钮
             Button {
-                withAnimation(.easeInOut(duration: 0.2)){
+                withAnimation(.easeInOut(duration: 0.2)) {
                     vm.startRunning()
                 }
             } label: {
-                Image(systemName: "arrowtriangle.right.circle.fill")
-                    .resizable()
+                SFSymbol.continueRunningButton
+                    .resizeable()
                     .frame(width: 75, height: 75)
                     .tint(.green)
                     .background(
@@ -206,7 +210,7 @@ extension RunningView {
         }
         .transition(.asymmetric(insertion: .scale(scale: 0.6), removal: .scale(scale: 0.6)))
     }
-    // 暂停跑步按钮
+    /// 暂停跑步按钮
     var stopButton: some View {
         Button {
             withAnimation(.easeInOut(duration: 0.2)) {

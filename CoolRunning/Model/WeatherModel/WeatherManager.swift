@@ -2,7 +2,7 @@
 import Foundation
 import Alamofire
 
-protocol WeatherManagerDelegate {
+protocol WeatherManagerDelegate: AnyObject {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: Weather)
     func didFailWithError(error: Error)
 }
@@ -11,8 +11,8 @@ struct WeatherManager {
     
     private var weatherURL = "https://devapi.qweather.com/v7/weather/now?key=29506e9647fe4aecb1839bb558ca1fbf"
     
-    var delegate: WeatherManagerDelegate?
-    
+    weak var delegate: WeatherManagerDelegate?
+    /// 查询天气信息
     func fetchWeather(long: Double, lat: Double) {
         let longitude = String(format: "%.2f", long)
         let latitude = String(format: "%.2f", lat)
@@ -34,5 +34,4 @@ struct WeatherManager {
             }
         }
     }
-    
 }

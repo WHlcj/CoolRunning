@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    /// App导航路由
     @Binding var path: NavigationPath
     // 用户信息
     @AppStorage("user_image") var userImage: String = "me"

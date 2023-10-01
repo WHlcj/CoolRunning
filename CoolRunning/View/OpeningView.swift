@@ -27,7 +27,7 @@ struct OpeningView: View {
     }
 }
 
-struct OpeningScreen_Previews: PreviewProvider {
+struct OpeningView_Previews: PreviewProvider {
     static var previews: some View {
         OpeningView()
     }

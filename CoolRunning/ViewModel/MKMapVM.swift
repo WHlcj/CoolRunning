@@ -68,14 +68,14 @@ class MKMapVM: NSObject, ObservableObject {
         // 启动设备方向更新（可显示指针）
         locationManager.startUpdatingHeading()
     }
-    
+    /// 开始跑步
     func startRunning() {
         // 开始计时
         self.startTimer()
         // 修改运动状态
         self.currentState = .Running
     }
-    
+    /// 停止跑步
     func stopRunning() {
         // 停止计时
         self.stopTimer()
@@ -106,7 +106,8 @@ extension MKMapVM: CLLocationManagerDelegate {
             self.locations = []
         }
         // 计算距离
-        if self.currentState == .Running { // 必须是跑步状态才增加distance
+        switch self.currentState {
+        case .Running:
             for newLocation in locations {
                 let howRecent = newLocation.timestamp.timeIntervalSinceNow
                 guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else{
@@ -118,17 +119,28 @@ extension MKMapVM: CLLocationManagerDelegate {
                 }
                 self.pre_location = newLocation
             }
-        } else {
+        case .Pause:
+            for newLocation in locations {
+                self.pre_location = newLocation
+            }
+        case .Ending:
             self.locations = []
             self.pre_location = nil
+        case .Preparing:
+            return
         }
-        
+
         if currentState != .Preparing {
-            //print("manager的的current的值为：\(self.currentState)current地址为：\(withUnsafePointer(to: self.currentState) { $0 })")
             // 记录用户位置并绘制路径
+            if let coordinate = pre_location?.coordinate {
+                self.locations.append(coordinate)
+            }
             self.locations.append(location.coordinate)
-            let polyline = MKPolyline(coordinates: self.locations, count: self.locations.count)
-            self.mapView.map.addOverlay(polyline)
+            let count = self.locations.count
+            if count > 3 {
+                let polyline = MKPolyline(coordinates: Array(self.locations[(count-3)..<count]), count: 3)
+                self.mapView.map.addOverlay(polyline)
+            }
         }
     }
 }
@@ -140,17 +152,13 @@ extension MKMapVM: MKMapViewDelegate {
         if let polyline = overlay as? MKPolyline {
             // 渲染路径覆盖层
             let renderer = MKPolylineRenderer(polyline: polyline)
-            switch currentState {
-            case .Running:
-                renderer.strokeColor = .systemGreen
-            case .Pause:
-                renderer.strokeColor = .systemGray
-            default:
-                break
-            }
             renderer.lineWidth = 8
-            //print("mapView的current的值为：\(self.currentState)mapView的current地址为：\(withUnsafePointer(to: self.currentState) { $0 })")
-            //print("路径颜色为: \(renderer.strokeColor!.accessibilityName)")
+            // 跑步状态轨迹为绿色，暂停状态轨迹为灰色
+            if currentState == .Running {
+                renderer.strokeColor = .systemGreen
+            } else if currentState == .Pause {
+                renderer.strokeColor = .systemGray
+            }
             return renderer
         }
         // 如果不是路径覆盖层则返回默认的渲染器

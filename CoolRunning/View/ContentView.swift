@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var view: AppRouter
+    /// App导航路由
     @Binding var path: NavigationPath
     
     var body: some View {

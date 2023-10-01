@@ -5,24 +5,29 @@ import SwiftUI
 /// - parameter text: This is the title for the alert.
 /// - parameter value: This is the binding value which control your alert presend.
 struct TextAlert: View {
+    
     var text: String
+    
     var body: some View {
-        HStack {
-            Image("icon1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 25, height: 25)
-                .cornerRadius(5)
-            Text(text)
-                .font(.caption)
-                .foregroundColor(.black)
+        VStack {
+            Spacer()
+            HStack {
+                Image("icon1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 25, height: 25)
+                    .cornerRadius(5)
+                Text(text)
+                    .font(.caption)
+                    .foregroundColor(.black)
+            }
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.ultraThinMaterial)
+            )
+            .transition(.asymmetric(insertion: .scale.animation(.spring()), removal: .opacity.animation(.spring())))
         }
-        .padding(8)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(.ultraThinMaterial)
-        )
-        .transition(.asymmetric(insertion: .scale.animation(.spring()), removal: .opacity.animation(.spring())))
     }
 }
 

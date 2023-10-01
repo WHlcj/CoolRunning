@@ -1,9 +1,3 @@
-//
-//  View+.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/8.
-//
 
 import SwiftUI
 

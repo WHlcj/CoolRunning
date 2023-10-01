@@ -1,26 +1,31 @@
-//
-//  OTPVerificationView.swift
-//  CoolRunning
-//
-//  Created by Changjun Li on 2023/3/8.
-//
 
 import SwiftUI
 
 struct OTPVerificationView: View {
     
+    /// 验证码输入
     @State private var otpText: String = ""
-    // Keyboard State
+    
+    /// 未开发完全时，预设验证码，测试用
+    let otpPin = "111000"
+    
+    /// 键盘状态
     @FocusState private var isKeyboardShowing: Bool
     
-    
     var body: some View {
-        VStack(alignment: .leading) {
-            otpTextBoxes
-            otpButton
+        ZStack {
+            VStack(alignment: .leading) {
+                otpTextBoxes
+                otpButton
+            }
+            .padding()
+            .frame(maxHeight: .infinity, alignment: .top)
+            
+//            // 验证码提示框
+//            .onAppear {
+//                TextAlert(text: otpText, boolValue: <#Binding<Bool>#>)
+//            }
         }
-        .padding()
-        .frame(maxHeight: .infinity, alignment: .top)
     }
 }
 
@@ -29,25 +34,23 @@ extension OTPVerificationView {
     var otpTextBoxes: some View {
         VStack(alignment: .leading) {
             Text("短信验证码")
-                .font(.largeTitle)
+                .font(.title)
             HStack {
-                // OTP Text Boxes
+                // OTP输入框
                 ForEach(0..<6, id: \.self) { index in
                     OTPBoxes(index)
                 }
             }
-
             .background(
                 TextField("", text: $otpText.limit(6))
                     .keyboardType(.numberPad)
-                // To show the most recent one-time code from message
-                    .textContentType(.oneTimeCode)
+                    .textContentType(.oneTimeCode)// 键盘上接收短信验证码
                     .frame(width: 1, height: 1) //不能删，防止误触崩溃
                     .opacity(0.001)
                     .blendMode(.screen)
                     .focused($isKeyboardShowing)
             )
-            .contentShape(Rectangle()) // help the tap
+            .contentShape(Rectangle()) // 加强点触效果
             .onTapGesture {
                 isKeyboardShowing.toggle()
             }
@@ -57,7 +60,7 @@ extension OTPVerificationView {
             optToolBarItems
         }
     }
-    
+    /// 键盘的done按键
     private var optToolBarItems: some ToolbarContent {
         ToolbarItem(placement: .keyboard, content: {
             Button("Done") {
@@ -73,13 +76,10 @@ extension OTPVerificationView {
 
             } label: {
                 Text("验证")
-                    .font(.title2)
-                    .bold()
-                    .frame(height: 30)
+                    .font(.title3.bold())
+                    .frame(height: 50)
                     .frame(maxWidth: UIScreen.main.bounds.width)
             }
-            .controlSize(.large)
-            .buttonBorderShape(.roundedRectangle(radius: 10))
             .buttonStyle(.borderedProminent)
             .disabled(otpText.count < 6)
         }
@@ -90,11 +90,12 @@ extension OTPVerificationView {
 
 // MARK: Functions
 extension OTPVerificationView {
+    /// 验证码输入框
     func OTPBoxes(_ index: Int) -> some View {
         let status = isKeyboardShowing && otpText.count == index
         return ZStack {
             if otpText.count > index {
-                // Finding Char At Index
+                // 找到当前输入字符的排序
                 let startIndex = otpText.startIndex
                 let charIndex = otpText.index(startIndex, offsetBy: index)
                 let charToString = String(otpText[charIndex])
@@ -103,9 +104,9 @@ extension OTPVerificationView {
         }
         .frame(width: 45, height: 45)
         .background(
-            // Highlight Current Active Box
+            // 高亮当前输入框
             RoundedRectangle(cornerRadius: 6, style: .continuous)
-                .stroke(status ? .purple : .gray, lineWidth: status ? 1 : 0.5)
+                .stroke(status ? .purple : .gray, lineWidth: status ? 4 : 0.5)
         )
         .frame(maxWidth: .infinity)
     }
